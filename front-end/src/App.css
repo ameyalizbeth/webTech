@@ -1,0 +1,326 @@
+.body{
+    overflow: hidden;
+    background-color: #1E1D2B;
+}
+.log-page-title {
+    width: 12rem;
+}
+
+.dark-blue {
+    color: #232e71;
+    font-weight: 500;
+}
+
+.grey {
+    color: #999 !important;
+}
+
+.grey-bg {
+    background: #99a6b1;
+}
+
+.orange {
+    color: #fba368;
+}
+
+.purple {
+    color: #5078fa;
+}
+
+.font-400 {
+    font-weight: 400;
+}
+
+.font-500 {
+    font-weight: 500;
+}
+
+.font-small {
+    font-size: small;
+    font-weight: 500;
+    color: #999;
+}
+
+.three-dots {
+    border: 0;
+    box-shadow: 2px 2px 8px rgba(80, 120, 250, 0.25);
+}
+
+.three-dots :hover {
+    background: #5078fa;
+    color: white;
+}
+
+.three-dots :focus {
+    background: white;
+    color: #232e71;
+}
+
+.white-input {
+    background-color: #fff !important;
+    border: 1px solid hsl(0, 0%, 70%) !important;
+    border-radius: 4px !important;
+}
+
+.white-input:focus {
+    border: 1px solid #2684ff !important;
+    box-shadow: 0 0 0 1px #2684ff !important;
+    border-radius: 4px !important;
+}
+
+.orange-btn {
+    background: #fba368 !important;
+}
+.green-btn {
+    background: #2eb554 !important;
+}
+
+.orange-btn:hover {
+    background: #b85720 !important;
+}
+
+.sem-cards-container {
+    overflow-y: "scroll";
+}
+
+.card-bg {
+    background: #eef2ff;
+    border-radius: 0.9rem;
+}
+
+.sem-card {
+    width: 15rem;
+    height: 182px;
+    transition: all 0.15s ease-in-out;
+}
+
+.sem-card:hover {
+    background-color: #d9e0fa;
+    transition: all 0.15s ease-in-out;
+}
+
+.card-hover:hover {
+    background-color: #d9e0fa;
+    transition: all 0.15s ease-in-out;
+}
+
+.activity-card {
+    max-width: 50rem;
+    min-height: 5rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.round {
+    background: #5078fa;
+    border-radius: 100%;
+    color: white;
+    height: 35px;
+    width: 35px;
+}
+
+.dropdown-menu {
+    background: #eef2ff;
+}
+
+.more-vert {
+    color: rgba(80, 120, 250, 0.5);
+}
+
+.more-vert:hover {
+    color: rgba(80, 120, 250, 1);
+}
+
+.dropdown-btn:focus {
+    box-shadow: none;
+}
+
+.green-flag {
+    background: rgba(57, 217, 138, 0.5);
+    color: #1d6b45;
+    font-weight: 500;
+    border-radius: 2rem;
+    text-align: center;
+    min-width: 8rem;
+}
+
+.orange-flag {
+    background: rgba(245, 167, 94, 0.5);
+    color: #b85720;
+    font-weight: 500;
+    border-radius: 2rem;
+    text-align: center;
+    min-width: 8rem;
+}
+
+.modal {
+    background: rgba(35, 46, 113, 0.3);
+}
+
+.modal-dialog {
+    border-radius: 1rem !important;
+}
+
+.modal-content {
+    border-radius: 1.2rem;
+    border: 0;
+}
+
+.close {
+    float: none;
+    font-size: inherit;
+}
+
+.btn .dark-blue-text,
+.dark-blue-text-active {
+    background-color:#2B2C3E;;
+    color: #fff;
+    font-weight: 500;
+    padding: 0.75rem 7.5%;
+    margin: 0 2vw;
+    border-radius: 15px 15px 0 0;
+}
+
+.dark-blue-text-active {
+    background: #2B2C3E;
+}
+
+.dark-blue-text a,
+.dark-blue-text a:hover {
+    color: #232e71;
+    text-decoration: none;
+}
+
+.log-box-main {
+    background: #2B2C3E;
+    border-radius: 20px;
+    width: 400px;
+    
+}
+
+.form-control {
+    background: #404251;
+    color: black;
+    border: 0;
+    border-radius: 10px;
+    width: 100%;
+    transition: all 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    background: #56586c;
+    box-shadow: none;
+    transition: all 0.15s ease-in-out;
+}
+
+.form-control-file {
+    color: #999;
+}
+
+.start-btn {
+    background: linear-gradient(90deg, #5740EE 0%, #9740EE 100%);
+    color: white;
+    font-weight: 500;
+    border-radius: 20px;
+    min-width: max-content;
+}
+
+.progress-bar {
+    width: 10px;
+    height: 10px;
+    padding: 2px;
+}
+
+.start-btn:hover {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), linear-gradient(90deg, #5740EE 0%, #9740EE 100%);
+    color: white;
+}
+
+.start-btn:focus {
+    box-shadow: none;
+}
+
+.onboarding-desc {
+    font-weight: normal;
+    color: #b3b3bb;
+}
+
+.onboarding-desc a {
+    color: #232e71;
+}
+
+/* .data-rafiki-1,
+.login-data-rafiki {
+    background: url("./graphics/illustration\ 1.png");
+}
+
+.data-rafiki-2 {
+    background: url("./graphics/illustration\ 1.png");
+}
+
+.data-rafiki-3,
+.teacher-data-rafiki {
+    background: url("./graphics/illustration\ 1.png");
+}
+
+.data-rafiki,
+.data-rafiki-1,
+.data-rafiki-2,
+.data-rafiki-3,
+.login-data-rafiki,
+.teacher-data-rafiki {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+    margin:0;
+    height: 300px;
+   
+} */
+.ask-cet{
+    background: url("./graphics/askCET-logo-original.svg");
+    background-repeat: no-repeat;
+    width: 150px;
+    height:45px;
+
+}
+.log-bg {
+    /* background: url("./graphics/landingpage-bg.svg");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vw;
+    background-position: center; */
+    background-color: #1E1D2B;
+    height: 100vh;
+}
+
+.login-data-rafiki,
+.teacher-data-rafiki {
+    height: 30vw;
+}
+
+@media (max-width: 768px) {
+    .log-bg {
+        /* background: url("./graphics/landingpage-bg.svg");
+        background-repeat: repeat-x;
+        background-size: 100vw 100vh;
+        background-position: center; */
+        background-color: #1E1D2B;
+        height: 100vh;
+    }
+    .log-box-main{
+        width: 80vw;
+    }
+
+    .login-data-rafiki,
+    .teacher-data-rafiki {
+        height: 400px;
+    }
+}
+
+.logout-bg {
+    /* background: url("./graphics/Mobile login-cuate.svg"); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0;
+    height: 25rem;
+    opacity: 50%;
+}

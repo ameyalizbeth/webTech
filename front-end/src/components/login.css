@@ -1,0 +1,78 @@
+
+.sign-a{
+  color:#fff;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh !important;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /*background-image: url('./login-hero.jpg');*/
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-box{
+  border-color: white !important;
+  border-width: 1px;
+  border-radius: 20px !important;
+  width:400px;
+  background-color: #fff;
+  
+}
+.input-box{
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 40px;
+  width: 300px;
+  border-width: 1px;
+  
+}
+
+.login h2{
+    margin-bottom: 8vh;
+    padding-top: 5vh;
+}
+
+
+.link:hover{
+  text-decoration: none;
+  background-color: white;
+}
+
+@media screen and (max-width:760px){
+  .login{
+    padding-top: 10vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .box{
+    margin-left: auto;
+    margin-right: auto;
+    height: 80vh;
+  width: 90vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  }
+
+  .form-control{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    margin: 0;
+    margin-bottom: 0 !important;
+   
+  }
+
+  button{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+  }
+
+}

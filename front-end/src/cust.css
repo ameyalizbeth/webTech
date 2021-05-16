@@ -1,0 +1,76 @@
+.dark-blue-text {
+    border-radius: calc(5vw + 20px) calc(5vw + 20px) 0 0;
+    margin: 0 0;
+    padding: 0.75rem 7%;
+}
+.dark-blue-text a{
+    color: #fff;
+}
+.dark-blue-text-active{
+    margin: 0;
+}
+.dark-blue-text a:hover{
+    color: #06F2B0;
+}
+.dot-top{
+    position: absolute;
+    top: -21%;
+    left:40%;
+    background: url("./graphics/circle-top.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:370px;
+    width: 370px;
+}
+.dot-right{
+    position: absolute;
+    top: 3%;
+    right:0%;
+    background: url("./graphics/circle-right.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:420px;
+    width: 200px;
+}
+.dot-left{
+    position: absolute;
+    top: 50%;
+    left:-6%;
+    background: url("./graphics/circle-bottom-left.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:200px;
+    width: 200px;
+}
+.dot-bottom{
+    position: absolute;
+    top: 45%;
+    right: 0;
+    background: url("./graphics/circle-bottom.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:420px;
+    width: 420px;
+}
+.ppl-bottom{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    background: url("./graphics/illustration-landingpage.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:80%;
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dash */
+
+.dash-main{
+    background-color: #1E1D2B;
+    height: 100vh;
+    color: #fff;
+    text-align: center;
+    font-size: 50px;
+}

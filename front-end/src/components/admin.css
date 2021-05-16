@@ -1,0 +1,20 @@
+.folder-bg {
+    /* background: url("../graphics/Folder-rafiki.svg"); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0;
+    height: 85%;
+    opacity: 50%;
+}
+
+.sem-sidebar {
+    min-width: 10rem;
+    max-width: 20rem;
+}
+
+.sem-sidebar div div.my-2:hover {
+    border-radius: 10px;
+    background: #8391bf;
+    color: white;
+}

@@ -1,0 +1,21 @@
+<svg width="481" height="481" viewBox="0 0 481 481" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d)">
+<circle cx="240.175" cy="240.175" r="95.2949" transform="rotate(30 240.175 240.175)" fill="url(#paint0_diamond)"/>
+</g>
+<defs>
+<filter id="filter0_d" x="0" y="0" width="480.351" height="480.351" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feMorphology radius="10" operator="dilate" in="SourceAlpha" result="effect1_dropShadow"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="50"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.133125 0 0 0 0 0.843413 0 0 0 0 0.8875 0 0 0 0.3 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<radialGradient id="paint0_diamond" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(273.188 180.616) rotate(102.035) scale(158.334)">
+<stop stop-color="#9740EE"/>
+<stop offset="1" stop-color="#5740EE"/>
+</radialGradient>
+</defs>
+</svg>

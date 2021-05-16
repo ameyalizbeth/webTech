@@ -1,0 +1,36 @@
+.progress-section {
+    height: min-content;
+}
+
+.progress-section div {
+    width: 15rem;
+}
+
+.progress-circle {
+    justify-content: center;
+}
+
+.chart-content div {
+    width: fit-content;
+}
+
+.num {
+    color: #fba368;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
+.target {
+    color: #999;
+    font-size: 1.5rem;
+}
+
+.num2 {
+    font-size: 1.5rem;
+    line-height: 1.2rem;
+}
+
+.text2 {
+    font-size: 1rem;
+}

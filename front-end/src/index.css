@@ -1,0 +1,170 @@
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Black"),
+        url("./fonts/MazzardH/MazzardH-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Black Italic"),
+        url("./fonts/MazzardH/MazzardH-BlackItalic.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Bold"),
+        url("./fonts/MazzardH/MazzardH-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Bold Italic"),
+        url("./fonts/MazzardH/MazzardH-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H ExtraBold"),
+        url("./fonts/MazzardH/MazzardH-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H ExtraBold Italic"),
+        url("./fonts/MazzardH/MazzardH-ExtraBoldItalic.woff2") format("woff2");
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H ExtraLight"),
+        url("./fonts/MazzardH/MazzardH-ExtraLight.woff2") format("woff2");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H ExtraLight Italic"),
+        url("./fonts/MazzardH/MazzardH-ExtraLightItalic.woff2") format("woff2");
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Italic"),
+        url("./fonts/MazzardH/MazzardH-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Light"),
+        url("./fonts/MazzardH/MazzardH-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Light Italic"),
+        url("./fonts/MazzardH/MazzardH-LightItalic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Medium"),
+        url("./fonts/MazzardH/MazzardH-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Medium Italic"),
+        url("./fonts/MazzardH/MazzardH-MediumItalic.woff2") format("woff2");
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Regular"),
+        url("./fonts/MazzardH/MazzardH-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H SemiBold"),
+        url("./fonts/MazzardH/MazzardH-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H SemiBold Italic"),
+        url("./fonts/MazzardH/MazzardH-SemiBoldItalic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Thin"),
+        url("./fonts/MazzardH/MazzardH-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: local("Mazzard H Thin Italic"),
+        url("./fonts/MazzardH/MazzardH-ThinItalic.woff2") format("woff2");
+    font-weight: 100;
+    font-style: italic;
+}
+
+body {
+    margin: 0;
+    font-family: "Mazzard H", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+.opa-50 {
+    opacity: 0.5;
+}
+
+.min-vh-93 {
+    min-height: 93vh !important;
+}
+
+.no-underline,
+.no-underline:hover {
+    text-decoration: none;
+}
