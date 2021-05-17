@@ -180,6 +180,23 @@ app.post("/login", (req, res) => {
         .catch((err) => console.log(err));
 });
 
+app.get("/:email/user", verifyJWT, (req, res, next) => {
+    // console.log(req.params.email);
+    user.findAll({where:{email:req.params.email}})
+        .then((user) => {
+            res.status(200).json({
+                
+                email: user.email,
+                department: user.department,
+                fullname:user.fullname
+                
+            });console.log(user);
+        })
+        .catch((err) => {
+
+            console.log(err);
+        });
+});
 
 sequelize
     .sync()

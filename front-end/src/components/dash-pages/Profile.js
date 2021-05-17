@@ -7,7 +7,8 @@ import "./profile.css";
 function Profile(props) {
     const [details, setDetails] = useState([]);
     // const u = props.location.state.username;
-    const u = localStorage.getItem("user");
+    const u = localStorage.getItem("email");
+    console.log(u);
 
     useEffect(() => {
         Axios.get(`http://localhost:8001/${u}/user`, {
@@ -37,7 +38,7 @@ function Profile(props) {
                         <div className='round d-flex justify-content-center align-items-center my-2 mx-3'>
                             <MdPerson size={22} />
                         </div>
-                        <div className='dark-blue h4'>{details.username}</div>
+                        <div className='dark-blue h4'>{details.fullname}</div>
                     </div>
                     <hr></hr>
 
@@ -48,37 +49,17 @@ function Profile(props) {
                                 {details.fullname}
                             </span>
                         </div>
-                        <div className='my-3'>
-                            <span className='purple font-500'>User name :</span>
-                            <span className='profile-form mb-4'>
-                                {details.username}
-                            </span>
-                        </div>
-
+                       
                         <div className='my-3'>
                             <span className='purple font-500'>Email :</span>
                             <span className='profile-form mb-4'>
                                 {details.email}
                             </span>
                         </div>
-
                         <div className='my-3'>
-                            <span className='purple font-500'>Address :</span>
+                            <span className='purple font-500'>Department :</span>
                             <span className='profile-form mb-4'>
-                                {details.address}
-                            </span>
-                        </div>
-
-                        <div className='my-3'>
-                            <span className='purple font-500'>Phone :</span>
-                            <span className='profile-form mb-4'>
-                                {details.phoneno}
-                            </span>
-                        </div>
-                        <div className='my-3'>
-                            <span className='purple font-500'>Current Sem :</span>
-                            <span className='profile-form mb-4'>
-                                {details.currsem}
+                                {details.department}
                             </span>
                         </div>
                     </div>

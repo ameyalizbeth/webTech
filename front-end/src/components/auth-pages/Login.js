@@ -4,7 +4,7 @@ import Axios from "axios";
 import './login.css'
 
 function Login() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [access, setAccess] = useState(false);
     const [message, setMessage] = useState("");
@@ -15,13 +15,13 @@ function Login() {
         e.preventDefault();
 
         Axios.post("http://localhost:8001/login", {
-            username: username,
+            email: email,
             password: password,
         }).then((response) => {
             if (response.data.auth) {
                 localStorage.setItem("token", response.data.token);
 
-                localStorage.setItem("user",username);
+                localStorage.setItem("email",email);
                 setAccess(true);
             } else {
                 setAccess(false);
@@ -35,7 +35,7 @@ function Login() {
             <Redirect
                 to={{
                     pathname: "/index/Home",
-                    state: { username: username }, // your data array of objects
+                    state: { email: email }, // your data array of objects
                 }}
             />
         );
@@ -78,12 +78,12 @@ function Login() {
                             <div className='py-4'>
                                 <input
                                     className='form-control px-3 mb-4'
-                                    type='text'
-                                    placeholder='Username'
-                                    name='username'
+                                    type='email'
+                                    placeholder='Email'
+                                    name='email'
                                     required
                                     onChange={(e) => {
-                                        setUsername(e.target.value);
+                                        setEmail(e.target.value);
                                     }}
                                 ></input>
                                 <input
