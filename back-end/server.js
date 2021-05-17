@@ -6,6 +6,8 @@ const Sequelize = require("sequelize");
 const Cors = require("cors");
 const sequelize = require("./util/database");
 const user = require("./models/user");
+const questiontable = require("./models/questiontable");
+const answertable = require("./models/answertable");
 const app = express();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -13,31 +15,18 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const activity = require("./models/activity");
-const admin = require("./models/admin");
-const sempoints = require("./models/sempoints");
+// const activity = require("./models/activity");
+// const admin = require("./models/admin");
+// const sempoints = require("./models/questiontable");
 require("dotenv").config();
 
-//MULTER
-// const filestorage = multer.diskStorage({
-//     destination:(req,file,cb)=>{
-//         cb(null,'images');
-//     },
-//     filename:(req,file,cb)=>{
 
-//         cb(null, new Date().toISOString().replace(/:/g,'-')+'-'+file.originalname);
-//     }
-// });
-// const fileFilter=(req,file,cb)=>{
-//     if(file.mimetype == 'image/jpg' || file.mimetype =='image/png' || file.mimetype =='image/jpeg'){
-//         cb(null,true);
-//     }
-//     else{
-//         cb(null,false);
-//     }
-
-// }
-
+user.hasMany(questiontable);
+questiontable.belongsTo(user,{constraints:true});
+user.hasMany(answertable);
+answertable.belongsTo(user,{constraints:true});
+questiontable.hasMany(answertable);
+answertable.belongsTo(questiontable,{constraints:true});
 var Storagecerti = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'certificates');
@@ -64,8 +53,6 @@ var Storagecerti = multer.diskStorage({
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/certi',multer({storage:Storagecerti,fileFilter:fileFiltercerti}).single('certificatedata'));
-app.use('/certificates',express.static(path.join(__dirname,'certificates')));
 
 // app.use('/images',express.static(path.join(__dirname,'images')));
 app.use(
@@ -122,31 +109,23 @@ app.use(function (req, res, next) {
 });
 
 
-// admin.create({
-//     username:"cs203"
-// }).then((r) => {
-//     console.log(r);
-// })
-// .catch((err) => {
-//     console.log(err);
-// });
+
 
 app.post("/signup", (req, res, next) => {
     const password = req.body.password;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
         user.create({
-            // name:req.body.name,
+           
             email: req.body.email,
-            username: req.body.username,
+            
             fullname:req.body.fullname,
             password: hash,
-            currsem:req.body.currsem,
-            address: req.body.address,
-            phoneno: req.body.phoneno,
+            department:req.body.department,
+            
         })
             .then((r) => {
-                const username = user.username;
+                const username = user.fullname;
                 const token = jwt.sign({ username }, process.env.SECRET, {
                     expiresIn: 7200,
                 });
@@ -165,7 +144,7 @@ app.post("/signup", (req, res, next) => {
     });
 });
 app.post("/login", (req, res) => {
-    user.findByPk(req.body.username)
+    user.findAll({where:{email:req.body.email}})
         .then((user) => {
             if (user) {
                 bcrypt.compare(
@@ -175,7 +154,7 @@ app.post("/login", (req, res) => {
                         if (response) {
                             req.session.user = user;
 
-                            const username = user.username;
+                            const username = user.fullname;
                             const token = jwt.sign(
                                 { username },
                                 process.env.SECRET,
@@ -201,370 +180,6 @@ app.post("/login", (req, res) => {
         .catch((err) => console.log(err));
 });
 
-app.post("/admin/login", (req, res) => {
-    admin
-        .findByPk(req.body.username)
-        .then((admin) => {
-            if (admin) {
-                const username = admin.username;
-                const token = jwt.sign({ username }, process.env.SECRET, {
-                    expiresIn: 7200,
-                });
-                // console.log(req.session.user);
-                res.status(200).json({ auth: true, token: token });
-            } else {
-                //    res.status(404).send({message:"No user found!!"});
-                res.json({ auth: false, message: "Admin not found!!" });
-            }
-        })
-        .catch((err) => console.log(err));
-});
-
-app.post("/admin/signup", (req, res, next) => {
-    admin
-        .create({
-            username: req.body.username,
-        })
-        .then((r) => {
-            const username = admin.username;
-            const token = jwt.sign({ username }, process.env.SECRET, {
-                expiresIn: 7200,
-            });
-            res.status(200).json({
-                message: "signup succesfull",
-                auth: true,
-                token: token,
-            });
-        })
-        .catch((err) => {
-            err.statusCode = 403;
-            err.message = "username already registered!! choose another";
-            res.send(err.message);
-            next(err);
-        });
-});
-
-// app.put("/sempoints", verifyJWT, (req, res, next) => {
-//     sempoints.update(
-//       {
-//         username:req.body.username,
-//         point: req.body.point
-//     },
-//     )
-//     .then((r) => {
-//         console.log(r)
-//     })
-//     .catch(
-//         (err) => console.log(err)
-//     )
-//    });
-
-app.post("/activity", verifyJWT, (req, res, next) => {
-    activity
-        .create({
-            username: req.body.username,
-            sem: req.body.sem,
-            activity: req.body.activity,
-            category:req.body.category,
-            prize: req.body.prize,
-            level: req.body.level,
-        })
-        .then((r) => {
-            res.status(200).json({ message: "Activity added" });
-        })
-        .catch((err) => {
-            err.statusCode = 403;
-            err.message = "Something went wrong!!";
-            res.send(err.message);
-            next(err);
-        });
-});
-
-app.get("/:username/sempoints", verifyJWT, (req, res, next) => {
-    sempoints
-        .findAll({
-            where: {
-                username: req.params.username,
-            },
-        })
-        .then((user) => {
-            res.status(200).json(
-                user
-               
-            );
-            // const users =[];
-            // console.log(user);
-            // user.map((e) => {
-            //     users.push(e.dataValues.point)
-            // });
-            // res.send(200).json(
-            //     users
-            // )
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-app.post("/sempoints", verifyJWT, (req, res, next) => {
-
-    console.log(req.body.point);
-
-    sempoints.findAll({where: {
-        username: req.body.username,
-        sem:req.body.sem
-    }}).then((response) => {
-        // console.log(response);
-        
-
-        if(response.length == 0){
-            sempoints
-        .create({
-            username: req.body.username,
-            sem: req.body.sem,
-            point:req.body.point
-        }).then((r) => {
-            console.log(r);
-        }).catch((err) => {
-                console.log(err);
-        })
-        }else{
-            sempoints.update({point:req.body.point},
-                {where:{
-                    username:req.body.username,
-                    sem:req.body.sem
-                },
-                returning:true,plain:true}).then((r)=>{
-                    console.log(r);
-                }).catch((err) => {
-                    console.log(err);
-                })
-        };
-    })
-
-    
-        .then((r) => {
-            res.status(200).json({ message: "Activity point added" });
-        })
-        .catch((err) => {
-            err.statusCode = 403;
-            err.message = "Something went wrong!!";
-            res.send(err.message);
-            next(err);
-        });
-});
-
-app.post("/approval", verifyJWT, (req, res, next) => {
-
-    console.log(req.body.verfiy);
-    activity.update({verify:true},
-        {where:{
-            id:req.body.id
-        },
-        returning:true,plain:true}).then((r)=>{
-            console.log(r);
-        }).catch((err) => {
-            console.log(err);
-        })
-
-    // sempoints.findAll({where: {
-    //     username: req.body.username,
-    //     sem:req.body.sem
-    // }}).then((response) => {
-    //     // console.log(response);
-        
-
-    //     if(response.length == 0){
-    //         sempoints
-    //     .create({
-    //         username: req.body.username,
-    //         sem: req.body.sem,
-    //         point:req.body.point
-    //     }).then((r) => {
-    //         console.log(r);
-    //     }).catch((err) => {
-    //             console.log(err);
-    //     })
-    //     }else{
-    
-    //     };
-    // })
-
-    
-    //     .then((r) => {
-    //         res.status(200).json({ message: "Activity point added" });
-    //     })
-    //     .catch((err) => {
-    //         err.statusCode = 403;
-    //         err.message = "Something went wrong!!";
-    //         res.send(err.message);
-    //         next(err);
-    //     });
-});
-
-app.post("/certi/activity",verifyJWT,(req,res,next)=>{
-
-    console.log(req.file);
-    console.log(req.body.title);
-
-    if(!req.file){
-      res.sendStatus(422);
-    }
-    // else if (req.userid===req.params.studentid){
-    //   certificate.create({username:req.userid,title:req.body.title,category:req.body.category,filepath:req.file.path});
-    //   res.sendStatus(200);
-    // }
-
-//    else
-//    res.sendStatus(401);
-    
-        activity
-        .create({
-            username: req.body.username,
-            sem: req.body.sem,
-            title: req.body.title,
-            category:req.body.category,
-            prize: req.body.prize,
-            level: req.body.level,
-            point:req.body.point,
-            verify:req.body.verify,
-            image:req.file.path
-        })
-        .then((r) => {
-            res.status(200).json({ message: "Activity added" });
-        })
-        .catch((err) => {
-            err.statusCode = 403;
-            err.message = "Something went wrong!!";
-            res.send(err.message);
-            next(err);
-        });
-    
-  });
-
-app.get("/:username/:sem/activity", verifyJWT, (req, res, next) => {
-    activity
-        .findAll({
-            where: {
-                username: req.params.username,
-                sem: req.params.sem,
-            },
-        })
-        .then((activity) => {
-            res.status(200).json(
-                activity
-                //     {
-
-                //     // name:user.name,
-                //     // activity:activity.activity,
-                //     // prize:activity.prize,
-                //     // level:activity.level,
-                //     // image:user.image
-                // }
-            );
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-app.get("/admin/studentinfo", verifyJWT, (req, res, next) => {
-    user
-        .findAll({
-            attributes: [
-                [
-                    Sequelize.fn("DISTINCT", Sequelize.col("username")),
-                    "username",
-                ],
-                "email"
-            ],
-        })
-        .then((activity) => {
-            res.status(200).json(activity);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-app.get("/isAuth", verifyJWT, (req, res) => {
-    res.send("User Is Authenticated");
-});
-
-// app.get('/login', (req, res) => {
-//     if (req.session.user){
-//         res.send({loggedIn: true, user: req.session.user});
-//     }else{
-//         res.send({loggedIn:false});
-//     }
-// });
-app.get("/:username/user", verifyJWT, (req, res, next) => {
-    user.findByPk(req.params.username)
-        .then((user) => {
-            res.status(200).json({
-                // name:user.name,
-                email: user.email,
-                address: user.address,
-                phoneno: user.phoneno,
-                username: user.username,
-                currsem: user.currsem,
-                fullname:user.fullname
-                // image:user.image
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-app.get("/:username/page", (req, res, next) => {
-    user.findByPk(req.params.username)
-        .then((user) => {
-            res.status(200).json({
-                name: user.name,
-                email: user.email,
-                address: user.address,
-                phoneno: user.phoneno,
-                username: user.username,
-                image: user.image,
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-// app.use((error,req,res,next)=>{
-//     console.log(error);
-//     const status = error.statusCode || 500;
-//     const message = error.message;
-//     res.status(status).send();
-//     console.log(status);
-// });
-
-app.post("/:username/images", (req, res) => {
-    user.findByPk(req.params.username)
-        .then((user) => {
-            const p = user.image;
-            console.log(req.file);
-            console.log(p);
-            user.update({ image: req.file.path })
-                .then((r) => {
-                    res.status(200).json({ path: req.file.path });
-                    if (p) {
-                        fs.unlink(p, function (err) {
-                            if (err) throw err;
-                            console.log("file deleted");
-                        });
-                    }
-                })
-                .catch((err) => console.log(err));
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-    console.log(req.file);
-});
 
 sequelize
     .sync()
