@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TitleSVG from "../TitleSVG";
 
 class Logout extends React.Component {
     constructor(props) {
@@ -16,7 +15,7 @@ class Logout extends React.Component {
                 <div className='my-5 logged-out d-flex justify-content-center user-select-none'>
                     <div className='d-flex flex-column align-items-center'>
                         <div className='log-page-title'>
-                            <TitleSVG />
+                            {/* <TitleSVG /> */}
                         </div>
                         <h5 className='mt-3 mb-4 grey'>
                             You've been logged out!

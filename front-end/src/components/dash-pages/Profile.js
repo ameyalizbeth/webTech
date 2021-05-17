@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import TitleSVG from "../TitleSVG";
 import { MdPerson } from "react-icons/md";
 import "./profile.css";
 
@@ -25,19 +24,9 @@ function Profile(props) {
         <div className='my-5 container user-select-none overflow-hidden'>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='log-page-title'>
-                    <TitleSVG />
+                    {/* <TitleSVG /> */}
                 </div>
-                <div>
-                    <Link to='/home' className='px-3 py-1 grey no-underline'>
-                        Home
-                    </Link>
-                    <Link to='/profile' className='px-5 py-1 no-underline'>
-                        Profile
-                    </Link>
-                    <Link to='/logout' className='btn start-btn px-3'>
-                        Logout
-                    </Link>
-                </div>
+                
             </div>
 
             <div className='my-5'>
@@ -95,11 +84,7 @@ function Profile(props) {
                     </div>
                 </div>
             </div>
-            <div className='profile-center'>
-                <Link to='/home' className='btn start-btn px-3'>
-                    Back to Home
-                </Link>
-            </div>
+            
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
-import TitleSVG from "../TitleSVG";
 import Axios from "axios";
 import './login.css'
 
@@ -35,7 +34,7 @@ function Login() {
         return (
             <Redirect
                 to={{
-                    pathname: "/dash",
+                    pathname: "/index/Home",
                     state: { username: username }, // your data array of objects
                 }}
             />
