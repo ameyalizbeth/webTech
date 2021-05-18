@@ -27,28 +27,7 @@ user.hasMany(answertable);
 answertable.belongsTo(user,{constraints:true});
 questiontable.hasMany(answertable);
 answertable.belongsTo(questiontable,{constraints:true});
-var Storagecerti = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'certificates');
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().toISOString().replace(/:/g,'-')+'-'+file.originalname);
-    }
-  });
-  const fileFiltercerti=(req,file,cb)=>{
-    console.log("yess");
-    console.log(file);
-    if(file.mimetype == 'application/pdf' || 
-        file.mimetype == 'image/jpg' || 
-        file.mimetype =='image/png' || 
-        file.mimetype =='image/jpeg'){
-        cb(null,true);
-    }
-    else{
-        cb(null,false);
-    }
 
-}
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
