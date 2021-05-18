@@ -8,7 +8,6 @@ function Profile(props) {
     const [details, setDetails] = useState([]);
     // const u = props.location.state.username;
     const u = localStorage.getItem("email");
-    console.log(u);
 
     useEffect(() => {
         Axios.get(`http://localhost:8001/${u}/user`, {
