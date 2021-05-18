@@ -8,7 +8,9 @@ const user = sequelize.define('user',{
     userid: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        allowNull:false,
+        unique:true
+       
     },
     
     fullname: {
@@ -21,7 +23,8 @@ const user = sequelize.define('user',{
     },
     email: {
         type:Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
+        primaryKey: true
 
     },
    department: {

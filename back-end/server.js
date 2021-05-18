@@ -10,7 +10,7 @@ const questiontable = require("./models/questiontable");
 const answertable = require("./models/answertable");
 const app = express();
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
+
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
@@ -27,28 +27,7 @@ user.hasMany(answertable);
 answertable.belongsTo(user,{constraints:true});
 questiontable.hasMany(answertable);
 answertable.belongsTo(questiontable,{constraints:true});
-var Storagecerti = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'certificates');
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().toISOString().replace(/:/g,'-')+'-'+file.originalname);
-    }
-  });
-  const fileFiltercerti=(req,file,cb)=>{
-    console.log("yess");
-    console.log(file);
-    if(file.mimetype == 'application/pdf' || 
-        file.mimetype == 'image/jpg' || 
-        file.mimetype =='image/png' || 
-        file.mimetype =='image/jpeg'){
-        cb(null,true);
-    }
-    else{
-        cb(null,false);
-    }
 
-}
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -111,40 +90,41 @@ app.use(function (req, res, next) {
 
 
 
-app.post("/signup", (req, res, next) => {
+app.post("/signup", async(req, res, next) => {
     const password = req.body.password;
-
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-        user.create({
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(req.body.password,salt);
+    user.create({
            
-            email: req.body.email,
-            
-            fullname:req.body.fullname,
-            password: hash,
-            department:req.body.department,
-            
-        })
-            .then((r) => {
-                const username = user.fullname;
-                const token = jwt.sign({ username }, process.env.SECRET, {
-                    expiresIn: 7200,
-                });
-                res.status(200).json({
-                    message: "signup succesfull",
-                    auth: true,
-                    token: token,
-                });
-            })
-            .catch((err) => {
-                err.statusCode = 403;
-                err.message = "username already registered!! choose another";
-                res.send(err.message);
-                next(err);
+        email: req.body.email,
+        
+        fullname:req.body.fullname,
+        password: hash,
+        department:req.body.department,
+        
+    })
+    .then((r) => {
+           
+            const username = user.fullname;
+            const token = jwt.sign({ username }, process.env.SECRET, {
+                expiresIn: 7200,
             });
-    });
+            res.status(200).json({
+                message: "signup succesfull",
+                auth: true,
+                token: token,
+            });
+        })
+        .catch((err) => {
+            console.log("hi")
+            err.statusCode = 403;
+            err.message = "email already registered!! choose another";
+            res.send(err.message);
+            next(err);
+        });
 });
 app.post("/login", (req, res) => {
-    user.findAll({where:{email:req.body.email}})
+    user.findByPk(req.body.email)
         .then((user) => {
             if (user) {
                 bcrypt.compare(
@@ -182,7 +162,7 @@ app.post("/login", (req, res) => {
 
 app.get("/:email/user", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
-    user.findAll({where:{email:req.params.email}})
+    user.findByPk(req.params.email)
         .then((user) => {
             res.status(200).json({
                 
@@ -197,7 +177,13 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
             console.log(err);
         });
 });
-
+app.use((error,req,res,next)=>{
+    console.log(error);
+    const status = error.statusCode || 500;
+    const message = error.message;
+    res.status(status).send();
+    console.log(status);
+});
 sequelize
     .sync()
     .then((r) => {
