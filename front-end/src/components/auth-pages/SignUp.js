@@ -1,47 +1,38 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import TitleSVG from "../TitleSVG";
 import Axios from "axios";
 import Select from "react-select";
 
-const cursem = [
-    { value: "S1", label: "S1" },
-    { value: "S2", label: "S2" },
-    { value: "S3", label: "S3" },
-    { value: "S4", label: "S4" },
-    { value: "S5", label: "S5" },
-    { value: "S6", label: "S6" },
-    { value: "S7", label: "S7" },
-    { value: "S8", label: "S8" },
-    
+const depment = [
+    { value: "CS", label: "Computer Science" },
+    { value: "ME", label: "Mechanical" },
+    { value: "EC", label: "Electronics" },
+    { value: "AE", label: "Applied" },
+    { value: "AR", label: "Architecture" },
+    { value: "EEE", label: "Electrical" },
+   
 ];
 
 function SignUp() {
-    const [username, setUsername] = useState("");
+    const [department, setDepartment] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [fullname, setFullname] = useState("");
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
     const [access, setAccess] = useState();
     const [message, setMessage] = useState("");
-    const [currsem, setCurrsem] = useState("");
 
     const register = (e) => {
         e.preventDefault();
 
         Axios.post("http://localhost:8001/signup", {
-            username: username,
+            department: department.value,
             fullname:fullname,
             password: password,
-            email: email,
-            phoneno: phone,
-            address: address,
-            currsem:currsem.value
+            email: email
         }).then((response) => {
             if (response.data.auth) {
                 localStorage.setItem("token", response.data.token);
-                localStorage.setItem("user", username);
+                localStorage.setItem("email", email);
                 setAccess(true);
             } else {
                 setAccess(false);
@@ -52,7 +43,10 @@ function SignUp() {
     if (access) {
         return (
             <Redirect
-                to='/dash'
+            to={{
+                pathname: "/index/Home",
+                state: { email: email }, // your data array of objects
+            }}
             />
         );
     }
@@ -79,20 +73,7 @@ function SignUp() {
                        
                     </div>
                     <div className='mx-auto py-4 log-box-main'>
-                        {/* <div className='log-title'>
-                    <Link
-                        to='/'
-                        style={{ color: "#fff", textDecoration: "none" }}
-                    >
-                        <b>LogIn</b>
-                    </Link>
-                </div>
-                <div
-                    className='sign-title'
-                    style={{ backgroundColor: "#fff", color: "#D92027" }}
-                >
-                    <b>SignUp</b>
-                </div> */}
+                    
                         <form
                             className='mx-auto form-group col-10'
                             onSubmit={register}
@@ -118,16 +99,7 @@ function SignUp() {
                                     }}
                                     required
                                 ></input>
-                                <input
-                                    className='form-control px-3 my-4'
-                                    type='text'
-                                    placeholder='Username'
-                                    name='name'
-                                    onChange={(e) => {
-                                        setUsername(e.target.value);
-                                    }}
-                                    required
-                                ></input>
+                                
                                 <input
                                     className='form-control px-3 my-4'
                                     type='password'
@@ -140,31 +112,11 @@ function SignUp() {
                                 ></input >
                                 <Select
                                     className="my-4"
-                                    defaultValue={currsem}
-                                    onChange={setCurrsem}
-                                    options={cursem}
+                                    defaultValue={department}
+                                    onChange={setDepartment}
+                                    options={depment}
                                 />
-                                <input
-                                    className='form-control px-3 my-4'
-                                    type='text'
-                                    placeholder='Address'
-                                    name='address'
-                                    onChange={(e) => {
-                                        setAddress(e.target.value);
-                                    }}
-                                    required
-                                ></input>
-                                <input
-                                    className='form-control px-3 mt-4 mx-auto'
-                                    type='tel'
-                                    placeholder='Mobile Number'
-                                    name='phone'
-                                    pattern='[5-9][0-9]{9}'
-                                    onChange={(e) => {
-                                        setPhone(e.target.value);
-                                    }}
-                                    required
-                                ></input>
+                               
                             </div>
                             <div className='my-2'>
                                 <button
