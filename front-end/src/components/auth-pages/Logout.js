@@ -1,15 +1,15 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Link } from "react-router-dom";
-
-class Logout extends React.Component {
-    constructor(props) {
-        super(props);
+import {withRouter} from 'react-router';
+function Logout (props) {
+    
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        this.state = {};
-    }
+        useEffect(()=>{
+            console.log("hi");
+        },[]);
 
-    render() {
+   
         return (
             <div className='container user-select-none'>
                 <div className='my-5 logged-out d-flex justify-content-center user-select-none'>
@@ -28,7 +28,7 @@ class Logout extends React.Component {
                 <div className='logout-bg'></div>
             </div>
         );
-    }
+    
 }
 
-export default Logout;
+export default withRouter(Logout);

@@ -3,6 +3,11 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import { MdPerson } from "react-icons/md";
 import "./profile.css";
+import "./index.css";
+import {withRouter} from 'react-router';
+import Nav from './Nav';
+
+import TopBar from './TopBar';
 
 function Profile(props) {
     const [details, setDetails] = useState([]);
@@ -21,6 +26,10 @@ function Profile(props) {
     }, []);
 
     return (
+        <div className="index-main grid-container">
+        <div className="ind-top"><TopBar/></div>
+        <div className="ind-nav"><Nav/></div>
+        <div className="ind-comp">
         <div className='my-5 container user-select-none overflow-hidden'>
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='log-page-title'>
@@ -66,7 +75,9 @@ function Profile(props) {
             </div>
             
         </div>
+        </div>
+        </div>
     );
 }
 
-export default Profile;
+export default withRouter(Profile);
