@@ -8,7 +8,6 @@ import Login from "./components/auth-pages/Login";
 import SignUp from "./components/auth-pages/SignUp";
 import Logout from "./components/auth-pages/Logout";
 import Profile from "./components/dash-pages/Profile";
-import Dash from "./components/dash-pages/Dash";
 import Index from "./components/dash-pages/Index";
 
 
@@ -20,7 +19,6 @@ class App extends Component {
                     <Route exact path='/' component={Login} />
                     <Route path='/signup' component={SignUp} />
                     <Route path="/index" component={Index}/>
-                    <Route path='/dash' component={Dash} />
                     <Route path='/home' component={Home} />
                     <Route path='/logout' component={Logout} />
                 </Switch>
