@@ -6,10 +6,10 @@ import TopBar from './TopBar';
 
 function Dash(){
     return (
-
         <div className="dash-main">
            Home page   
         </div>
+      
     );
 }
 

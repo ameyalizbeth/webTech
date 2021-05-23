@@ -4,10 +4,10 @@ import "./index.css";
 import TopBar from './TopBar';
 function Activities(){
     return (
-        
         <div className="dash-main">
            activities page   
         </div>
+      
     );
 }
 
