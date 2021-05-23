@@ -177,6 +177,91 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
             console.log(err);
         });
 });
+
+app.get("/question",verifyJWT,(req,res,next)=>{
+    questiontable.findAll()
+    .then((r)=>{
+        console.log(r);
+    })
+    .catch((err)=>{
+        next(err);
+    })
+})
+
+app.get("/answer/:questionid",verifyJWT,(req,res,next)=>{
+    answertable.findAll({where:{questiontableQuestionid:req.params.questionid}})
+    .then((r)=>{
+        console.log(r);
+    })
+    .catch((err)=>{
+        next(err);
+    })
+})
+app.post("/votes/:answerid",verifyJWT,(req,res,next)=>{
+    answertable.findByPk(req.params.answerid)
+    .then((answer)=>{
+        answer.votes +=1;
+    })
+    .catch((err)=>{
+        next(err);
+    })
+})
+app.post("/question/user", verifyJWT, (req, res, next) => {
+    // console.log(req.params.email);
+    
+    questiontable.create({question:req.body.question,category:req.body.category,userEmail:req.body.email})
+    .then((r)=>{
+       res.send(200);
+    })
+    .catch((err)=>{
+        next(err)
+    })
+
+        
+});
+app.post("/answer/user", verifyJWT, (req, res, next) => {
+    // console.log(req.params.email);
+    
+    answertable.create({answer:req.body.answer,userEmail:req.body.email,questiontableQuestionid:req.body.questionid})
+    .then((r)=>{
+       res.send(200);
+    })
+    .catch((err)=>{
+        next(err)
+    })
+
+        
+});
+
+app.get("/question/user", verifyJWT, (req, res, next) => {
+    // console.log(req.params.email);
+    
+    questiontable.findAll({where:{userEmail:req.body.email}})
+    .then((r)=>{
+        console.log(r);
+       res.send(200);
+    })
+    .catch((err)=>{
+        next(err)
+    })
+
+        
+});
+
+app.get("/answer/user", verifyJWT, (req, res, next) => {
+    // console.log(req.params.email);
+    
+    answertable.findAll({where:{userEmail:req.body.email}})
+    .then((r)=>{
+       res.send(200);
+    })
+    .catch((err)=>{
+        next(err)
+    })
+
+        
+});
+
 app.use((error,req,res,next)=>{
     console.log(error);
     const status = error.statusCode || 500;
