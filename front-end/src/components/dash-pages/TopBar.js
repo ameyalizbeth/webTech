@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router,Link,useHistory } from "react-router-dom";
+
+
 import './topbar.css'
 import "./index.css";
 function TopBar(){
+    
     return (
         <div className="top-bar-main">
             <div className="search-main ">
@@ -48,4 +51,4 @@ function TopBar(){
 
 
 
-export default TopBar;
+export default withRouter(TopBar);
