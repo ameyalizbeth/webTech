@@ -3,7 +3,7 @@ import {
     Link
 } from "react-router-dom";
 import './nav.css'
-
+import "./index.css";
 function Nav(){
     return (
         <div className="nav-main">

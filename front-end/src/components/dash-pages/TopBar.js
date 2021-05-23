@@ -1,8 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router,Link } from "react-router-dom";
+import { BrowserRouter as Router,Link,useHistory } from "react-router-dom";
+import {withRouter} from 'react-router';
 import './topbar.css'
-
+import "./index.css";
 function TopBar(){
+
     return (
         <div className="top-bar-main">
             <div className="search-main ">
@@ -32,8 +34,10 @@ function TopBar(){
                     <div class="drop dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <Link to="/index/profile" class="dr-link dropdown-item" href="#">Profile</Link>
                         <Link to="/logout" class="dr-link dropdown-item" href="#">Log Out</Link>
+                       
                     </div>
                 </div>
+               
             </div>
             
             
@@ -46,4 +50,4 @@ function TopBar(){
 
 
 
-export default TopBar;
+export default withRouter(TopBar);

@@ -11,6 +11,7 @@ import Profile from "./components/dash-pages/Profile";
 import Index from "./components/dash-pages/Index";
 
 
+
 class App extends Component {
     render() {
         return (
@@ -21,6 +22,7 @@ class App extends Component {
                     <Route path="/index" component={Index}/>
                     <Route path='/home' component={Home} />
                     <Route path='/logout' component={Logout} />
+
                 </Switch>
             </BrowserRouter>
         );
