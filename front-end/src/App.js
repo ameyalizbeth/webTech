@@ -8,9 +8,10 @@ import Login from "./components/auth-pages/Login";
 import SignUp from "./components/auth-pages/SignUp";
 import Logout from "./components/auth-pages/Logout";
 import Profile from "./components/dash-pages/Profile";
-import Dash from "./components/dash-pages/Dash";
-import Activities from "./components/dash-pages/Activities";
-import Explore from "./components/dash-pages/Explore";
+
+import Index from "./components/dash-pages/Index";
+
+
 
 
 
@@ -19,16 +20,13 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path={"/logout"} component={Logout} />
-                    <Route exact path={"/"} component={Login} />
-                    <Route exact path={"/signup"} component={SignUp} />
-                   
-                   
-                    <Route exact path={"/home"} component={Home} />
-                    <Route exact path={"/index/Home"}  component={Dash}/>
-                    <Route exact path={"/index/Profile"}  component={Profile}/>
-                    <Route exact path={"/index/Activities"}  component={Activities}/>
-                    <Route exact path={"/index/Explore"}  component={Explore}/>
+
+                    <Route exact path='/' component={Login} />
+                    <Route path='/signup' component={SignUp} />
+                    <Route path="/index" component={Index}/>
+                    <Route path='/home' component={Home} />
+                    <Route path='/logout' component={Logout} />
+
                 </Switch>
             </BrowserRouter>
         );

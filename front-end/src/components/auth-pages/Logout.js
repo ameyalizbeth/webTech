@@ -1,13 +1,14 @@
 import React,{useEffect,useState} from "react";
 import { Link } from "react-router-dom";
-import {withRouter} from 'react-router';
-function Logout (props) {
+
+
+
+function Logout () {
     
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        useEffect(()=>{
-            console.log("hi");
-        },[]);
+      
+
 
    
         return (
@@ -31,4 +32,4 @@ function Logout (props) {
     
 }
 
-export default withRouter(Logout);
+export default Logout;

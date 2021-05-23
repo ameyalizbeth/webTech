@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router,Link,useHistory } from "react-router-dom";
-import {withRouter} from 'react-router';
+
+
 import './topbar.css'
 import "./index.css";
 function TopBar(){
-    let history = useHistory();
+    
     return (
         <div className="top-bar-main">
             <div className="search-main ">
