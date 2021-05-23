@@ -51,4 +51,4 @@ function TopBar(){
 
 
 
-export default withRouter(TopBar);
+export default TopBar;
