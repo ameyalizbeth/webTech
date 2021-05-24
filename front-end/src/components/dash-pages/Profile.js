@@ -22,7 +22,6 @@ function Profile(props) {
     }, []);
 
     return (
-        <div className="index-main grid-container">
         
         <div className='my-5 container user-select-none overflow-hidden'>
             <div className='d-flex justify-content-between align-items-center'>
@@ -33,34 +32,34 @@ function Profile(props) {
             </div>
 
             <div className='my-5'>
-                <div className='dark-blue h5'>Profile</div>
+                <div className=' h5'>Profile</div>
                 <div className='card-bg py-3 px-5 profile-size'>
                     <div></div>
                     <div className='d-flex align-items-center my-3 mr-3'>
                         <div className='round d-flex justify-content-center align-items-center my-2 mx-3'>
                             <MdPerson size={22} />
                         </div>
-                        <div className='dark-blue h4'>{details.fullname}</div>
+                        <div className='h4'>{details.fullname}</div>
                     </div>
                     <hr></hr>
 
                     <div className='profile-center my-1'>
                     <div className='my-3'>
-                            <span className='purple font-500'>Full Name :</span>
-                            <span className='profile-form mb-4'>
+                            <span className=' font-500'>Full Name :</span>
+                            <span className=' mb-4'>
                                 {details.fullname}
                             </span>
                         </div>
                        
                         <div className='my-3'>
-                            <span className='purple font-500'>Email :</span>
-                            <span className='profile-form mb-4'>
+                            <span className=' font-500'>Email :</span>
+                            <span className=' mb-4'>
                                 {details.email}
                             </span>
                         </div>
                         <div className='my-3'>
-                            <span className='purple font-500'>Department :</span>
-                            <span className='profile-form mb-4'>
+                            <span className='font-500'>Department :</span>
+                            <span className=' mb-4'>
                                 {details.department}
                             </span>
                         </div>
@@ -69,7 +68,6 @@ function Profile(props) {
             </div>
         </div>
             
-        </div>
         
     );
 }

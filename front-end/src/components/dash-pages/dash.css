@@ -2,11 +2,43 @@
 
 .dash-main{
 
-    color: #fff;
-    text-align: center;
-    font-size: 50px;
+    padding-left: 60px;
+    padding-top: 10px;
+    /* background-color: #d3d3d3; */
+    position: relative;
+    width: 78vw;
 }
 
+.qst-card-in{
+    padding:18px;
+    background-color: #2B2C3E;
+    border-radius: 16px 16px 0 0;
+
+}
+.qst-ans{
+    font-size: 12px;
+}
+.qst-card{
+    padding: 20px;
+}
+.vote-bar{
+    background: #404251;
+    height: 35px;
+    border-radius: 0px 0px 16px 16px;
+    padding:6px 20px;
+}
+.qst-name{
+    display: flex;
+    margin-top: 5px;
+}
+.person-icon{
+    background: url("../assets/new-profile-vector-large.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 35px;
+    height:35px;
+    margin-right: 10px;
+}
 
 /* Explore */
 

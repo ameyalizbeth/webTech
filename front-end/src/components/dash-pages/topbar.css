@@ -1,7 +1,14 @@
 .top-bar-main{
+
+    background-color: #1E1D2B;
     display: flex;
     justify-content: space-around;
-    padding-top: 30px;
+    width: 80vw;
+    padding:40px;
+    position: fixed;
+    top:0;
+    left:21%;
+    z-index: 20;
 
 }
 .search-main{
@@ -11,11 +18,11 @@
     
     width: 25vw;
     height: 38px;
-    border-radius: 10px;
+    border-radius: 100px;
 }
 .search-main button{
     position: absolute;
-    right: 0;
+    right: 10px;
     color: #999;
     background:none;
     border: none;
@@ -31,6 +38,7 @@
     color: #fff;
     box-shadow: none;
     transition: all 0.15s ease-in-out;
+    border-radius: 100px;
 }
 .top-profile{
     background: url("../assets/new-profile-vector-large.svg");

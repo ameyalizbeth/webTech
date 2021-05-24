@@ -1,0 +1,52 @@
+.modal-main{
+    background-color: #2B2C3E;
+    color: #fff;
+}
+.qst-rules{
+    height: 100px;
+    background-color: #404251;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    color: #f1f1f1;
+    font-size: 12px;
+}
+.drop-btn{
+    background: #404251;
+    border-radius: 16px;
+    border: none;
+    color: #fff;
+    height: 35px;
+    font-size: 13px;
+    text-align: center;
+    padding: 0 15px;
+    width: 150px;
+    margin: 5px;
+}
+
+.drop-it{
+    background: #404251;
+    padding:5px;
+    border-radius: 16px;
+    margin-top: 5px;
+    border:none;
+}
+.drop-each{
+    color: #fff;
+    margin: 0;
+}
+.drop-each:hover{
+    background: #9740EE;
+    border-radius: 16px;
+    color: black;
+}
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    border:none;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
