@@ -8,7 +8,7 @@ const Landing = () => {
         {/* <button onClick={() => setWobble(1)}>Click me</button> */}
         <div class="container log-disp">
             <div className="log-title">
-                <h3>ask CET</h3>
+                <h3>askCET</h3>
                 <p>
                     Ask anything and everything to find the best answers to your<br/>
                     never ending doubts regarding our prestigious college. ;)

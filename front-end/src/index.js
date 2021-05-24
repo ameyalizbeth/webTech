@@ -20,6 +20,9 @@ import "./fonts/MazzardH/MazzardH-SemiBoldItalic.woff2";
 import "./fonts/MazzardH/MazzardH-Thin.woff2";
 import "./fonts/MazzardH/MazzardH-ThinItalic.woff2";
 
+import { Icon, InlineIcon } from '@iconify/react';
+import home24Filled from '@iconify/icons-fluent/home-24-filled';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
