@@ -22,17 +22,17 @@ function Index(){
 
     return (
         
-            <div className="index-main grid-container">
+            <div className="index-main">
+            
                 
-                <Router>
-                    <div className="ind-top"><TopBar/></div>
-                    <div className="ind-nav"><Nav/></div>
+                    <TopBar/>
+                    <Nav/>
                     <div className="ind-comp">
                     <Switch>
-                        <Route path="/index/:id" children={<Main/>} />
+                        <Route exact path="/index/:id" children={<Main/>} />
                     </Switch>
                     </div>
-                </Router>
+                
             </div>
         
         

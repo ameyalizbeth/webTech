@@ -4,10 +4,12 @@ import {
 } from "react-router-dom";
 import './nav.css'
 
+
 import { Icon, InlineIcon } from '@iconify/react';
 import home24Filled from '@iconify/icons-fluent/home-24-filled';
 import squareMultiple24Filled from '@iconify/icons-fluent/square-multiple-24-filled';
 import colorLine24Filled from '@iconify/icons-fluent/color-line-24-filled';
+
 
 function Nav(){
     return (

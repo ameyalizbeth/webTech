@@ -84,7 +84,7 @@
 }
 
 .card-bg {
-    background: #eef2ff;
+    background: #2B2C3E;
     border-radius: 0.9rem;
 }
 
@@ -153,7 +153,7 @@
 }
 
 .modal {
-    background: rgba(35, 46, 113, 0.3);
+    background: #0c0c0c9e;
 }
 
 .modal-dialog {

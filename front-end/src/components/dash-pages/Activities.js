@@ -2,9 +2,12 @@ import React from 'react';
 
 function Activities(){
     return (
-        <div className="activity-main">
-            Activities Page
+
+        <div className="dash-main">
+           activities page   
         </div>
+      
+
     );
 }
 

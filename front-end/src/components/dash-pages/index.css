@@ -1,18 +1,29 @@
 .index-main{
     background-color: #1E1D2B;
     width: 100vw;
-    padding: 0;
+    padding:0;
     margin: 0;
     color: #fff;
+    position: relative;
 }
 .ind-top { 
+    position: fixed;
+    top:0;
+    left: 20%;
     grid-area: header;
     /* background-color: violet; */
     width: 80vw;
-    padding:30px
+    padding:30px;
+    
+    top: 0;
     
  }
 .ind-nav { 
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    left: 0;
     grid-area: menu;
     height: 100vh;
     width: 20vw;
@@ -20,10 +31,11 @@
     border-radius: 0px 36px 36px 0px;
 }
 .ind-comp { 
-    grid-area: main;
-    /* background-color: red; */
-    width: 80vw;
-    z-index: 10;
+    
+    width: 75vw;
+    margin-left: 20%;
+    margin-right: 0;
+    padding-top: 8%;
 }
 
 .grid-container {
