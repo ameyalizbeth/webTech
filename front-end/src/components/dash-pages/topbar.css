@@ -15,7 +15,6 @@
     position: relative;
     display: flex;
     background: #404251;
-    
     width: 25vw;
     height: 38px;
     border-radius: 100px;
@@ -39,6 +38,7 @@
     box-shadow: none;
     transition: all 0.15s ease-in-out;
     border-radius: 100px;
+    margin-top: 0;
 }
 .top-profile{
     background: url("../assets/new-profile-vector-large.svg");
