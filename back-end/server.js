@@ -15,9 +15,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-// const activity = require("./models/activity");
-// const admin = require("./models/admin");
-// const sempoints = require("./models/questiontable");
+
 require("dotenv").config();
 
 
@@ -181,6 +179,7 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
 app.get("/question",verifyJWT,(req,res,next)=>{
     questiontable.findAll()
     .then((r)=>{
+        
         console.log(r);
     })
     .catch((err)=>{
@@ -201,6 +200,7 @@ app.post("/votes/:answerid",verifyJWT,(req,res,next)=>{
     answertable.findByPk(req.params.answerid)
     .then((answer)=>{
         answer.votes +=1;
+        
     })
     .catch((err)=>{
         next(err);
