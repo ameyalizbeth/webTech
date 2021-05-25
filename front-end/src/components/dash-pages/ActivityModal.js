@@ -23,14 +23,11 @@ const priz = [
 ];
 
 function Activity(props) {
-    const [activity, setActivity] = useState("");
-    const [prize, setPrize] = useState("");
-    const [level, setLevel] = useState("");
+    
+    const [question, setQuestion] = useState("");
     const [category, setCategory] = useState("");
-    const [access, setAccess] = useState();
     const [message, setMessage] = useState("");
     const [details, setDetails] = useState([]);
-    const [point, setPoint] = useState(0);
 
     
 
@@ -39,6 +36,8 @@ function Activity(props) {
     // const sem = props.location.state.sem;
     const semR = localStorage.getItem("sem");
     const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
 
       
 
@@ -52,123 +51,33 @@ function Activity(props) {
             // console.log(response.data);
         });
     }, []);
-    const calculate = () => {
-
-
-        var points = 3;
-        var total=0;
-
-        if(level.value === "International"){
-            points=points+10;
-        }
-        else if(level.value === "State"){
-            
-            points=points+5;
-        }
-        else if(level.value === "College"){
-
-            points=points+3;
-        }
-        
-        if(prize.value === "First"){
-            points=points+5;
-        }
-        else if(prize.value === "Second"){
-            
-            points=points+5;
-        }
-        else if(prize.value === "Third"){
-
-            points=points+1;
-        }
-        setPoint(points);
-
-        for (var i=0; i<details.length;i++){
-            total = total +details[i].point;
-        }
-        Axios.post("http://localhost:8001/sempoints", {
-            username: user,
-            sem:semR,
-            point:total+points
-        },
-        {
-            headers: {
-                "x-access-token": localStorage.getItem("token"),
-            },
-        }        
-        )
-
-    }
+    
 
     const uploadDetails = (e) => {
         
-
+       
         const token = localStorage.getItem("token");
-        
-        
-        
-        console.log(point);
 
-        var certificatedata = new FormData();
-
-        const image = document.querySelector('input[type="file"]').files[0];
-
-        certificatedata.append("username", user);
-        certificatedata.append("sem", semR);
-        certificatedata.append("title", activity);
-        certificatedata.append("category", category.value);
-        certificatedata.append("level", level.value);
-        certificatedata.append("prize", prize.value);
-        certificatedata.append("point", point);
-        certificatedata.append("verify", false);
-        certificatedata.append("certificatedata", image);
-
-        fetch(`http://localhost:8001/certi/activity`, {
+        fetch(`http://localhost:8001/question/user`, {
             method: "POST",
             headers: {
+                'content-type':'application/json',
                 "x-access-token": localStorage.getItem("token"),
             },
-            body: certificatedata,
+            body: JSON.stringify({
+                question:question,
+                category:category,
+                email:email
+            }),
         })
             .then((r) => {
                 if (r.status == 200) {
-                    alert("Certificate updated successfully");
+                    alert("Question added successfully");
                 } else if (r.status == 422) alert("Invalid File format");
                 else if (r.status == 401) alert("Authentication error");
             })
             .catch((err) => console.log(err));
 
-        // Axios.post(
-        //     `http://localhost:8001/activity`,
-        //     {
-        //         username: user,
-        //         sem: semR,
-        //         activity: activity,
-        //         category: category.value,
-        //         prize: prize.value,
-        //         level: level.value,
-        //     },
-        //     {
-        //         headers: {
-        //             // 'Content-Type' :"application/json",
-        //             "x-access-token": token,
-        //         },
-        //     }
-        // ).then((response) => {
-        //     console.log(response);
-
-        //     // if (response.data.auth) {
-
-        //     //     localStorage.setItem("token", response.data.token);
-        //     //     setAccess(true);
-
-        //     // } else {
-
-        //     //     setAccess(false);
-        //     //     setMessage(response.data);
-
-        //     // }
-        // });
     };
     if (!token) {
         return <Redirect to='/login' />;
@@ -211,13 +120,13 @@ function Activity(props) {
                         </div>
                     </div>
                     <input
-                        className='form-control my-3'
+                        className='form-control iin my-3'
                         type='text'
                         placeholder='Write your Question'
                         name='question'
-                        // onChange={(e) => {
-                        //     setPrize(e.target.value);
-                        // }}
+                        onChange={(e) => {
+                            setQuestion(e.target.value);
+                        }}
                         required
                     ></input>
                 </div>
@@ -237,7 +146,7 @@ function Activity(props) {
                     <div>
                         <button
                             className='btn start-btn col-6'
-                            onClick={calculate}
+                            onClick={uploadDetails}
                         >
                             Ask Question
                         </button>
