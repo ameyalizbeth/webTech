@@ -178,9 +178,53 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
 
 app.get("/question",verifyJWT,(req,res,next)=>{
     questiontable.findAll()
-    .then((r)=>{
+    .then(async(r)=>{
+        const questions=[]
+       
+        var  length = r.length;
+   var promise1 = await new Promise((resolve,reject)=>{
+    r.map(async(e)=>{
+            
+           
+       await answertable.findAll(
+            {where:
+                {questiontableQuestionid:e.dataValues.questionid}
+            }
+            ).then((r)=>{
+                
+                var qaobject = new Object();
+                qaobject.question =e.dataValues.question;
+                qaobject.answer = r;
+                questions.push(qaobject);
+                length-=1;
+                console.log(questions);
+            
+
+            }).catch((err)=>{
+                next(err);
+
+            })
+    })
+    if(length === 0){
+        resolve(questions);
+    }
+    
+   }) ;   
+  
         
-        console.log(r);
+        promise1
+        .then(function(value){
+            console.log("hi");
+            res.status(200).json({questions:value});
+     
+        })
+        .catch((err)=>{
+            next(err);
+        })
+       
+
+              
+    
     })
     .catch((err)=>{
         next(err);
