@@ -86,8 +86,8 @@ function Activity(props) {
     return (
         <div className=' mx-5 my-3'>
             <h5 className=' my-3'>Ask Your Question </h5>
-            <form className='form-group' onSubmit={uploadDetails}>
-                <div class='form-group'>
+            <form className='form-group'>
+                <div class='form-group'  onSubmit={uploadDetails}>
                     <div className="qst-rules">
                         <ul>
                             <li>Make sure your question has not been asked already</li>
@@ -147,6 +147,7 @@ function Activity(props) {
                         <button
                             className='btn start-btn col-6'
                             onClick={uploadDetails}
+                            type="submit"
                         >
                             Ask Question
                         </button>

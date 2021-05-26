@@ -1,11 +1,26 @@
-import React from 'react';
+import React,{ useEffect} from 'react';
 import './dash.css';
 import {initData} from './data';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-
+import Axios from "axios";
 
 
 function Dash(){
+    useEffect(() => {
+        Axios.get(`http://localhost:8001/question`, {
+            headers: {
+                "x-access-token": localStorage.getItem("token"),
+            },
+        }).then((response) => {
+            console.log(response);
+            // console.log(response.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    }, []);
+    
+
     return (
 
         <div className="dash-main">
