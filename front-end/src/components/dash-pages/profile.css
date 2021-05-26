@@ -23,3 +23,22 @@
 .profile-size {
     max-width: 50rem;
 }
+
+.profile-page-icon{
+    background: url("../assets/new-profile-vector-large.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100px;
+    height:100px;
+    float: right;
+    position: relative;
+    margin-top:-5px;
+    margin-right:16px;
+    
+
+}
+
+.btn-style{
+    background-color: #404251;
+}
+
