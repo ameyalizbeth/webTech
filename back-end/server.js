@@ -15,9 +15,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-// const activity = require("./models/activity");
-// const admin = require("./models/admin");
-// const sempoints = require("./models/questiontable");
+
 require("dotenv").config();
 
 
@@ -178,15 +176,58 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
         });
 });
 
-app.get("/question",verifyJWT,(req,res,next)=>{
-    questiontable.findAll()
-    .then((r)=>{
-        console.log(r);
+const promise1 = (r) => {
+    return new Promise(async(resolve, reject) => {
+     
+      let questions= await Promise.all(
+        r.map(async (e) => {
+          return answertable
+            .findAll({
+              where: { questiontableQuestionid: e.dataValues.questionid },
+            })
+            .then((r) => {
+              var qaobject = new Object();
+              qaobject.question = e.dataValues.question;
+              qaobject.category = e.dataValues.category;
+              qaobject.user = e.dataValues.userEmail;
+              qaobject.answer = r;
+             
+              
+              return qaobject
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+      )
+      console.log(questions)
+     
+      
+        resolve(questions);
+     
+    });
+  };
+
+app.get("/question", verifyJWT, async(req, res, next) => {
+  questiontable
+    .findAll()
+    .then((r) => {
+        promise1(r)
+        .then(function (value) {
+          console.log("hi");
+          res.status(200).json({ questions: value });
+        })
+        .catch((err) => {
+            console.log(err);
+          next(err);
+        });
     })
-    .catch((err)=>{
-        next(err);
-    })
-})
+    .catch((err) => {
+      next(err);
+    });
+    
+   
+});
 
 app.get("/answer/:questionid",verifyJWT,(req,res,next)=>{
     answertable.findAll({where:{questiontableQuestionid:req.params.questionid}})
@@ -201,6 +242,7 @@ app.post("/votes/:answerid",verifyJWT,(req,res,next)=>{
     answertable.findByPk(req.params.answerid)
     .then((answer)=>{
         answer.votes +=1;
+        
     })
     .catch((err)=>{
         next(err);

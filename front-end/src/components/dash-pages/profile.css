@@ -28,11 +28,10 @@
     background: url("../assets/new-profile-vector-large.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100px;
-    height:100px;
+    width: 85px;
+    height:85px;
     float: right;
     position: relative;
-    margin-top:-5px;
     margin-right:16px;
     
 
@@ -41,4 +40,31 @@
 .btn-style{
     background-color: #404251;
 }
+.prof-avat-main{
+    position: relative;
+}
+.btn-posi{
+    position: absolute;
+    top:55px;
+    right: 5px;
+    width: 50px;
+   
 
+}
+.edit-btn{
+    background-color: #2B2C3E;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-edit{
+    color:rgb(0, 0, 0);
+    padding: 3px;
+    background-color: #06e6b1;
+    border-radius: 100%;
+    border: solid 3px #2B2C3E;
+    
+}

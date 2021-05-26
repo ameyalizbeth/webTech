@@ -1,57 +1,19 @@
 import React, { useState, useEffect } from "react";
 import './modal.css'
 import { Link, Redirect } from "react-router-dom";
-import Axios from "axios";
-import Select from "react-select";
 
-const catego = [
-    { value: "Sports and games", label: "Sports and games" },
-    { value: "Cultural", label: "Cultural" },
-];
 
-const levelof = [
-    { value: "College", label: "College" },
-    { value: "State", label: "State" },
-    { value: "International", label: "International" },
-];
 
-const priz = [
-    { value: "First", label: "First" },
-    { value: "Second", label: "Second" },
-    { value: "Third", label: "Third" },
-    { value: "Participation", label: "Participation" },
-];
 
 function Activity(props) {
     
     const [question, setQuestion] = useState("");
     const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
-    const [details, setDetails] = useState([]);
-
     
-
-    // const u = props.location.state.username;
-    const user = localStorage.getItem("user");
-    // const sem = props.location.state.sem;
-    const semR = localStorage.getItem("sem");
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
-
-      
-
-    useEffect(() => {
-        Axios.get(`http://localhost:8001/${user}/${semR}/activity`, {
-            headers: {
-                "x-access-token": localStorage.getItem("token"),
-            },
-        }).then((response) => {
-            setDetails(response.data);
-            // console.log(response.data);
-        });
-    }, []);
-    
 
     const uploadDetails = (e) => {
         
@@ -86,7 +48,7 @@ function Activity(props) {
     return (
         <div className=' mx-5 my-3'>
             <h5 className=' my-3'>Ask Your Question </h5>
-            <form className='form-group' onSubmit={uploadDetails}>
+            <form className='form-group'>
                 <div class='form-group'>
                     <div className="qst-rules">
                         <ul>
@@ -98,15 +60,6 @@ function Activity(props) {
                     
                 </div>
                 <div class='form-group'>
-                    {/* <label for='category' className='dark-blue purple'>
-                        Category
-                    </label> */}
-                    {/* <Select
-                        
-                        defaultValue={category}
-                        onChange={setCategory}
-                        options={catego}
-                    /> */}
                     <div className="dropdown">
                         <button className="drop-btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             select category
@@ -146,7 +99,7 @@ function Activity(props) {
                     <div>
                         <button
                             className='btn start-btn col-6'
-                            // onClick={uploadDetails}
+                            onClick={uploadDetails}
                             type="submit"
                         >
                             Ask Question
