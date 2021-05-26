@@ -146,7 +146,8 @@ function Activity(props) {
                     <div>
                         <button
                             className='btn start-btn col-6'
-                            onClick={uploadDetails}
+                            // onClick={uploadDetails}
+                            type="submit"
                         >
                             Ask Question
                         </button>
