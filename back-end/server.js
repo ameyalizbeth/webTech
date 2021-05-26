@@ -176,60 +176,58 @@ app.get("/:email/user", verifyJWT, (req, res, next) => {
         });
 });
 
-app.get("/question",verifyJWT,(req,res,next)=>{
-    questiontable.findAll()
-    .then(async(r)=>{
-        const questions=[]
-       
-        var  length = r.length;
-   var promise1 = await new Promise((resolve,reject)=>{
-    r.map(async(e)=>{
-            
-           
-       await answertable.findAll(
-            {where:
-                {questiontableQuestionid:e.dataValues.questionid}
-            }
-            ).then((r)=>{
-                
-                var qaobject = new Object();
-                qaobject.question =e.dataValues.question;
-                qaobject.answer = r;
-                questions.push(qaobject);
-                length-=1;
-                console.log(questions);
-            
-
-            }).catch((err)=>{
-                next(err);
-
-            })
-    })
-    if(length === 0){
-        resolve(questions);
-    }
-    
-   }) ;   
-  
-        
-        promise1
-        .then(function(value){
-            console.log("hi");
-            res.status(200).json({questions:value});
+const promise1 = (r) => {
+    return new Promise(async(resolve, reject) => {
      
-        })
-        .catch((err)=>{
-            next(err);
-        })
-       
-
+      let questions= await Promise.all(
+        r.map(async (e) => {
+          return answertable
+            .findAll({
+              where: { questiontableQuestionid: e.dataValues.questionid },
+            })
+            .then((r) => {
+              var qaobject = new Object();
+              qaobject.question = e.dataValues.question;
+              qaobject.category = e.dataValues.category;
+              qaobject.user = e.dataValues.userEmail;
+              qaobject.answer = r;
+             
               
+              return qaobject
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+      )
+      console.log(questions)
+     
+      
+        resolve(questions);
+     
+    });
+  };
+
+app.get("/question", verifyJWT, async(req, res, next) => {
+  questiontable
+    .findAll()
+    .then((r) => {
+        promise1(r)
+        .then(function (value) {
+          console.log("hi");
+          res.status(200).json({ questions: value });
+        })
+        .catch((err) => {
+            console.log(err);
+          next(err);
+        });
+    })
+    .catch((err) => {
+      next(err);
+    });
     
-    })
-    .catch((err)=>{
-        next(err);
-    })
-})
+   
+});
 
 app.get("/answer/:questionid",verifyJWT,(req,res,next)=>{
     answertable.findAll({where:{questiontableQuestionid:req.params.questionid}})
