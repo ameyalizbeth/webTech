@@ -79,7 +79,7 @@ function Login() {
                                 <input
                                     className='form-control px-3 mb-4'
                                     type='email'
-                                    placeholder='Email'
+                                    placeholder='CET Email ID'
                                     name='email'
                                     required
                                     onChange={(e) => {
@@ -102,7 +102,7 @@ function Login() {
                                     className='btn mx-auto start-btn d-block col-6'
                                     type='submit'
                                 >
-                                    Sign in
+                                    Login
                                 </button>
                                 <p
                                     style={{
