@@ -40,7 +40,7 @@
     border-radius: 16px;
     color: black;
 }
-input[type=text], select, textarea {
+.iin {
     width: 100%;
     padding: 12px;
     border-radius: 16px;

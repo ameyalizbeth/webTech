@@ -208,10 +208,13 @@ app.post("/votes/:answerid",verifyJWT,(req,res,next)=>{
 })
 app.post("/question/user", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
-    
-    questiontable.create({question:req.body.question,category:req.body.category,userEmail:req.body.email})
+    console.log(req.body.question);
+    questiontable.create({
+        question:req.body.question,
+        category:req.body.category,
+        userEmail:req.body.email})
     .then((r)=>{
-       res.send(200);
+       res.sendStatus(200);
     })
     .catch((err)=>{
         next(err)
