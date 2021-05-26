@@ -4,12 +4,12 @@ import Axios from "axios";
 import Select from "react-select";
 
 const depment = [
-    { value: "CS", label: "Computer Science" },
-    { value: "ME", label: "Mechanical" },
-    { value: "EC", label: "Electronics" },
-    { value: "AE", label: "Applied" },
-    { value: "AR", label: "Architecture" },
-    { value: "EEE", label: "Electrical" },
+    { value: "Computer Science Engineering", label: "Computer Science" },
+    { value: "Mechanical Engineering", label: "Mechanical" },
+    { value: "Electronics & Communication Engineering", label: "Electronics" },
+    { value: "Applied Electronics", label: "Applied" },
+    { value: "Architecture", label: "Architecture" },
+    { value: "Electrical Engineering", label: "Electrical" },
    
 ];
 
