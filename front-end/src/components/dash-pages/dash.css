@@ -59,3 +59,23 @@
     text-align: center;
     font-size: 50px;
 }
+
+
+/* Mobile */
+@media (max-width: 576px) {
+
+    /* Dash */
+
+.dash-main{
+
+        padding-left: 50px;
+        padding-top: 10px;
+        /* background-color: #d3d3d3; */
+        position: relative;
+        width:90vw;
+    }
+    .qst-card-in{
+        padding:25px 0 25px 35px;
+    
+    }
+}

@@ -71,3 +71,37 @@
     background-color: #6d6e76;
     color: rgb(194, 194, 194);
 }
+
+
+@media (max-width: 576px) {
+    .top-bar-main{
+        left: 0;
+        width: 100vw;
+        padding: 15px 10px 20px;
+        justify-content: center;
+    }
+    .search-main{
+        width: 70vw;
+        position: absolute;
+        bottom: 10px;
+        left: 15%;
+    }
+    .prof-right{
+        margin-right: 0;
+        display: flex;
+        width: 100vw;
+        justify-content: space-around;
+        
+    }
+    .prof-right button{
+        margin-bottom: 50px;
+        margin-top: 5px;
+        margin-left: -10%;
+
+        
+    }
+    .search-main button{
+        right: 10px;
+        top: -37px;
+    }
+}

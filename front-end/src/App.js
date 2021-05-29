@@ -3,7 +3,6 @@ import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import './cust.css'
 import './components/custom.css'
-import Home from "./components/Home";
 import Login from "./components/auth-pages/Login";
 import SignUp from "./components/auth-pages/SignUp";
 import Logout from "./components/auth-pages/Logout";
@@ -24,7 +23,6 @@ class App extends Component {
                     <Route exact path='/' component={Login} />
                     <Route path='/signup' component={SignUp} />
                     <Route path="/index" component={Index}/>
-                    <Route path='/home' component={Home} />
                     <Route path='/logout' component={Logout} />
 
                 </Switch>
