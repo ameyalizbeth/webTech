@@ -349,7 +349,7 @@ app.get("/question/:email", verifyJWT, (req, res, next) => {
         var ansobject = new Object();
         ansobject.question =e.dataValues.question;
         ansobject.questionid =e.dataValues.questionid;
-        
+        ansobject.category = e.dataValues.category;
        
        
           result.push(ansobject);  
@@ -380,7 +380,7 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        r.map((e)=>{
         var ansobject = new Object();
         ansobject.question =e.dataValues.questiontable.question;
-        
+        ansobject.category = e.dataValues.questiontable.category;
         ansobject.answer = e.dataValues.answer;
         ansobject.votes =e.dataValues.votes;
        

@@ -57,6 +57,7 @@ function TopBar(){
                         <figure className='top-profile'></figure>
                     </a>
                     <div class="drop dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        
                         <Link to="/index/profile" class="dr-link dropdown-item" href="#">Profile</Link>
                         <Link to="/logout" class="dr-link dropdown-item" href="#">Log Out</Link>
                        
