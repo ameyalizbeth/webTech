@@ -14,8 +14,10 @@
     padding:18px;
     background-color: #2B2C3E;
     border-radius: 16px 16px 0 0;
+    
 
 }
+
 .qst-ans{
     font-size: 12px;
     padding: 6px;
@@ -23,7 +25,12 @@
 }
 .qst-card{
     padding: 20px;
+    transition: transform .3s;
 }
+.qst-card:hover{
+    transform: scale(1.2);
+}
+
 .vote-bar{
     display: flex;
     justify-content: space-between;
@@ -54,6 +61,17 @@
     font-size: 50px;
     
 }
+.qst-card-in-exp{
+    padding:14px 20px;
+    background-color: #2B2C3E;
+    border-radius: 16px;
+}
+.view-ans{
+    font-size: 10px;
+    padding: 0;
+    color: gray;
+}
+
 
 
 /* Activities */
