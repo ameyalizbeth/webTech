@@ -6,6 +6,8 @@ import Activities from './Activities';
 import Dash from './Dash';
 import Explore from './Explore'
 import Profile from './Profile';
+import Questions from './Questions';
+import Answers from './Answers';
 
 function Main(){
 
@@ -37,6 +39,22 @@ function Main(){
             )
                 
         }
+
+        else if (par === "questions"){
+            return(
+                <Questions/>
+            )
+                
+        }
+
+        else if (par === "answers"){
+            return(
+                <Answers/>
+            )
+                
+        }
+
+        
         else if (par === "profile"){
             return(
                 <Profile/>
