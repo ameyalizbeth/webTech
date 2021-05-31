@@ -62,7 +62,7 @@ app.use(cookieParser());
 app.use(
     session({
         key: "username",
-        secret: "appu703453",
+        secret: "appukuttan",
         resave: false,
         saveUninitialized: false,
         cookie: {
