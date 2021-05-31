@@ -19,6 +19,46 @@
     text-decoration: none;
 }
 
-.activities-link::after{
+.activities-vote-bar{
+    display: flex;
+    background: #404251;
+    height: 35px;
+    border-radius: 0px 0px 16px 16px;
+    padding:6px 20px;
+}
+
+.activities-qst-card{
+    padding: 20px;
+    transition: transform .3s;
+}
+
+.activities-qst-card:hover{
+    transform: scale(1.2);
+}
+
+.act-qst-card-in{
+    padding:18px;
+    background-color: #2B2C3E;
+    border-radius: 16px 16px;
+}
+
+img{
+    margin-right: 0.5rem;
+}
+
+.menu-icon{
+    /* display: inline-block; */
+    float: right;
+    width: 10%;
+    color: #6f717e;
+}
+
+#menu-icon:hover{
     background-color: #404251;
+    border-radius: 100%;
+}
+
+.qst{
+    display: inline-block;
+    width: 80%;
 }

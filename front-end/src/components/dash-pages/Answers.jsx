@@ -1,23 +1,24 @@
 import React,{useEffect, useState} from 'react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
-
-export default function Answers(){
+import './activities.css';
+export default function Answers(props){
     const [details, setDetails] = useState();
+    const email = localStorage.getItem("email");
     useEffect(() => {
-        Axios.get(`http://localhost:8001/activityanswer/hira@gmail.com`, {
+        Axios.get(`http://localhost:8001/activityanswer/${email}`, {
             headers: {
                 "x-access-token": localStorage.getItem("token"),
             },
         }).then((response) => {
-            // setDetails(response.data.questions);
-            console.log("response");
+            setDetails(response.data.result);
+            // console.log(response);
         });
     }, []);
 
 
     return(
-        <div>
+        <div className="dash-main">
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >
@@ -33,7 +34,7 @@ export default function Answers(){
                                     <figure className='person-icon'></figure>
                                 </div>
                                 <div>
-                                    <div>{item.user}</div>
+                                    <div>{props.name}</div>
                                     <div style={{fontSize:10,color:"gray"}}>from{" "} 
                                         <span style={{color:"#06F2B0"}}>
                                             {item.category}
@@ -42,11 +43,10 @@ export default function Answers(){
                                 </div>
                             </div>
                             <div className="qst-ans">
-                                {/* {item.desc} */}
-                                Answer Goes here
+                                {item.answer}
                             </div>
                         </div>
-                        <div className="vote-bar">vote bar</div>
+                        <div className="activities-vote-bar"><img className="vote-icon" src="https://img.icons8.com/plumpy/24/000000/up.png"/>{item.votes}</div>
                     </div>
                     )
 
