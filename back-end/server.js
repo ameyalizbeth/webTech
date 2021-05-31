@@ -10,11 +10,11 @@ const questiontable = require("./models/questiontable");
 const answertable = require("./models/answertable");
 const app = express();
 const bcrypt = require("bcrypt");
-
+const multer = require('multer');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
+
 
 require("dotenv").config();
 
@@ -29,9 +29,27 @@ answertable.belongsTo(questiontable,{constraints:true});
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
+const filestorage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'images');
+    },
+    filename:(req,file,cb)=>{
+        
+        cb(null, new Date().toISOString().replace(/:/g,'-')+'-'+file.originalname);
+    }
+});
+const fileFilter=(req,file,cb)=>{
+    if(file.mimetype == 'image/jpg' || file.mimetype =='image/png' || file.mimetype =='image/jpeg'){
+        cb(null,true);
+    }
+    else{
+        cb(null,false);
+    }
 
+}
+app.use('/images',express.static(path.join(__dirname,'images')));
+app.use('/dp',multer({storage:filestorage,fileFilter:fileFilter}).single('data'));
 
-// app.use('/images',express.static(path.join(__dirname,'images')));
 app.use(
     Cors({
         origin: ["http://localhost:3000"],
@@ -44,7 +62,7 @@ app.use(cookieParser());
 app.use(
     session({
         key: "username",
-        secret: "appu703453",
+        secret: "appukuttan",
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -54,7 +72,6 @@ app.use(
 );
 
 app.use(express.json());
-// app.use(multer({storage:filestorage,fileFilter:fileFilter}).single('data'));
 
 const verifyJWT = (req, res, next) => {
     // const token = req.headers["x-access-token"];
@@ -74,16 +91,6 @@ const verifyJWT = (req, res, next) => {
     }
 };
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization"
-    );
-
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    next();
-});
 
 
 
@@ -114,7 +121,7 @@ app.post("/signup", async(req, res, next) => {
             });
         })
         .catch((err) => {
-            console.log("hi")
+            
             err.statusCode = 403;
             err.message = "email already registered!! choose another";
             res.send(err.message);
@@ -159,22 +166,56 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/:email/user", verifyJWT, (req, res, next) => {
-    // console.log(req.params.email);
+    console.log(req.params.email);
     user.findByPk(req.params.email)
         .then((user) => {
             res.status(200).json({
                 
                 email: user.email,
                 department: user.department,
-                fullname:user.fullname
-                
-            });console.log(user);
+                fullname:user.fullname,
+                image:user.image
+            });
         })
         .catch((err) => {
 
             console.log(err);
         });
 });
+
+app.post("/dp/:email",(req,res,next)=>{
+    
+    
+    user.findByPk(req.params.email)
+    .then((user)=>{
+        console.log(user);
+        const p = user.image;
+        console.log(req.file);
+        user.update(
+            {image:req.file.path}
+            )
+        .then(r=>{
+            res.status(200).json({path:req.file.path});
+            if(p){
+            fs.unlink(p,function (err){
+                if(err) throw err;
+                console.log('file deleted');
+        })}
+
+
+        }).catch(err=>{
+            err.statusCode = 500;
+            err.message = "error occured";
+            next(err);
+        }) ;
+
+    })
+    .catch((err)=>{
+        next(err);
+    })
+
+})
+
 
 const promise1 = (r) => {
     return new Promise(async(resolve, reject) => {
@@ -183,14 +224,25 @@ const promise1 = (r) => {
         r.map(async (e) => {
           return answertable
             .findAll({
+                attributes: [
+                   [ sequelize.fn('MAX',sequelize.col('votes')),"votes"],
+                   'answerid','answer'
+                ],
               where: { questiontableQuestionid: e.dataValues.questionid },
+              include: [
+                user
+              ],
             })
             .then((r) => {
+               
               var qaobject = new Object();
               qaobject.question = e.dataValues.question;
+              qaobject.questionid = e.dataValues.questionid;
               qaobject.category = e.dataValues.category;
-              qaobject.user = e.dataValues.userEmail;
-              qaobject.answer = r;
+              qaobject.user =e.dataValues.user.fullname;
+              qaobject.answer = r[0].dataValues.answer;
+              qaobject.answervotes = r[0].dataValues.votes;
+              qaobject.answereduser =  r[0].dataValues.user;
              
               
               return qaobject
@@ -200,7 +252,7 @@ const promise1 = (r) => {
             });
         })
       )
-      console.log(questions)
+    // console.log(questions)
      
       
         resolve(questions);
@@ -210,11 +262,15 @@ const promise1 = (r) => {
 
 app.get("/question", verifyJWT, async(req, res, next) => {
   questiontable
-    .findAll()
+    .findAll({
+        include:[
+            user
+        ]
+     })
     .then((r) => {
         promise1(r)
         .then(function (value) {
-          console.log("hi");
+          
           res.status(200).json({ questions: value });
         })
         .catch((err) => {
@@ -230,7 +286,8 @@ app.get("/question", verifyJWT, async(req, res, next) => {
 });
 
 app.get("/answer/:questionid",verifyJWT,(req,res,next)=>{
-    answertable.findAll({where:{questiontableQuestionid:req.params.questionid}})
+    answertable.findAll(
+        {where:{questiontableQuestionid:req.params.questionid}})
     .then((r)=>{
         console.log(r);
     })
@@ -278,13 +335,16 @@ app.post("/answer/user", verifyJWT, (req, res, next) => {
         
 });
 
-app.get("/question/user", verifyJWT, (req, res, next) => {
+app.get("/question/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
-    questiontable.findAll({where:{userEmail:req.body.email}})
+    questiontable.findAll({where:{userEmail:req.params.email}})
     .then((r)=>{
-        console.log(r);
-       res.send(200);
+        const questions = []
+        r.map((e)=>{
+            questions.push(e.dataValues.question)
+        })
+        res.status(200).json({question: questions})
     })
     .catch((err)=>{
         next(err)
@@ -293,12 +353,20 @@ app.get("/question/user", verifyJWT, (req, res, next) => {
         
 });
 
-app.get("/answer/user", verifyJWT, (req, res, next) => {
+app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
-    answertable.findAll({where:{userEmail:req.body.email}})
+    answertable.findAll({where:{userEmail:req.params.email},
+    include:[
+        questiontable
+    ]})
     .then((r)=>{
-       res.send(200);
+    //    const answers = []
+    //    r.map((e)=>{
+    //        answers.push(e.dataValues.answer)
+    //    })
+    //    res.status(200).json({answers: answers})
+    console.log(r);
     })
     .catch((err)=>{
         next(err)
