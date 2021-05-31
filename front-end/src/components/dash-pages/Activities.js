@@ -1,3 +1,4 @@
+
 import React,{useState, useEffect} from 'react';
 import Axios from "axios";
 import {
@@ -17,12 +18,13 @@ function Activities(){
     const [colorQ, setColorQ] = useState();
     useEffect(() => {
         Axios.get(`http://localhost:8001/question/${u}`, {
+
             headers: {
                 "x-access-token": localStorage.getItem("token"),
             },
         }).then((response) => {
-            setCountQ(response.data.question.length);
-        });
+             setCountQ(response.data.result.length);
+    });
     }, []);
 
     function handleQuestionClick(){

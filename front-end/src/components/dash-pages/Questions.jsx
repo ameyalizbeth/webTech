@@ -12,8 +12,8 @@ export default function Questions(){
                 "x-access-token": localStorage.getItem("token"),
             },
         }).then((response) => {
-            setDetails(response.data.question);
-            setCount(response.data.question.length);
+            setDetails(response.data.result);
+            setCount(response.data.result.length);
             console.log(response);
         });
     }, []);
@@ -30,7 +30,7 @@ export default function Questions(){
 
                     <div className="qst-card">
                         <div className="qst-card-in">
-                            <div className="qst">{item}</div>
+                            <div className="qst">{item.question}</div>
                             <div className="qst-name">
                                 <div>
                                     <figure className='person-icon'></figure>
