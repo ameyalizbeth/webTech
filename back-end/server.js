@@ -237,6 +237,7 @@ const promise1 = (r) => {
                
               var qaobject = new Object();
               qaobject.question = e.dataValues.question;
+              qaobject.questionid = e.dataValues.questionid;
               qaobject.category = e.dataValues.category;
               qaobject.user =e.dataValues.user.fullname;
               qaobject.answer = r[0].dataValues.answer;
