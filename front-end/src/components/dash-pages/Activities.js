@@ -1,20 +1,36 @@
-import React,{ useEffect,useState}from 'react';
-import Axios from "axios";
 
+import React,{useState, useEffect} from 'react';
+import Axios from "axios";
+import {
+    Link, Switch, Route
+} from "react-router-dom";
+import './activities.css';
+import Main from './Main';
+import Activities_nav from './Activities_nav';
 function Activities(){
+
+    const u = localStorage.getItem("email");
+    const [countQ, setCountQ] = useState(0);
+    const [countA, setCountA] = useState(0);
     useEffect(() => {
-        Axios.get(`http://localhost:8001/activityanswer/ameya123@cet.ac.in`, {
+        Axios.get(`http://localhost:8001/question/${u}`, {
+
             headers: {
                 "x-access-token": localStorage.getItem("token"),
             },
         }).then((response) => {
-             console.log(response.data);
+
+            setCountQ(response.data.question.length);
         });
     }, []);
+
+
+
     return (
 
         <div className="dash-main">
-           activities page   
+                   
+            <Activities_nav countQ={countQ} countA={countA}/>
         </div>
       
 

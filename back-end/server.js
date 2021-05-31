@@ -338,6 +338,7 @@ app.post("/answer/user", verifyJWT, (req, res, next) => {
 app.get("/question/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
+
     questiontable.findAll(
         {where:{userEmail:req.params.email}
     })
@@ -356,7 +357,7 @@ app.get("/question/:email", verifyJWT, (req, res, next) => {
        console.log(result);
        res.status(200).json({result:result});
       
-    })
+ })
     .catch((err)=>{
         next(err)
     })
@@ -366,6 +367,7 @@ app.get("/question/:email", verifyJWT, (req, res, next) => {
 
 app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
+
    
     answertable.findAll(
         {where:{userEmail:req.params.email},
@@ -387,6 +389,7 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        })
        console.log(result);
        res.status(200).json({result:result});
+
     })
     .catch((err)=>{
         next(err)
