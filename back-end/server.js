@@ -335,13 +335,16 @@ app.post("/answer/user", verifyJWT, (req, res, next) => {
         
 });
 
-app.get("/question/user", verifyJWT, (req, res, next) => {
+app.get("/question/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
-    questiontable.findAll({where:{userEmail:req.body.email}})
+    questiontable.findAll({where:{userEmail:req.params.email}})
     .then((r)=>{
-        console.log(r);
-       res.send(200);
+        const questions = []
+        r.map((e)=>{
+            questions.push(e.dataValues.question)
+        })
+        res.status(200).json({question: questions})
     })
     .catch((err)=>{
         next(err)
@@ -350,12 +353,20 @@ app.get("/question/user", verifyJWT, (req, res, next) => {
         
 });
 
-app.get("/answer/user", verifyJWT, (req, res, next) => {
+app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
-    answertable.findAll({where:{userEmail:req.body.email}})
+    answertable.findAll({where:{userEmail:req.params.email},
+    include:[
+        questiontable
+    ]})
     .then((r)=>{
-       res.send(200);
+    //    const answers = []
+    //    r.map((e)=>{
+    //        answers.push(e.dataValues.answer)
+    //    })
+    //    res.status(200).json({answers: answers})
+    console.log(r);
     })
     .catch((err)=>{
         next(err)

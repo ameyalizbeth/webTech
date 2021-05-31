@@ -1,0 +1,19 @@
+.activities-link{
+    
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    color: #ffffff61;
+    padding:10px 20px;
+    text-decoration: none;
+    text-align: center;
+    margin: 1rem;
+
+}
+
+.activities-link:hover{
+    background-color: #404251;
+    border-radius: 10px;
+    color: #06E6B1;
+    text-decoration: none;
+}
