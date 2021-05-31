@@ -31,15 +31,17 @@ function Activity(props) {
         }else{
 
             data.append('data',image);
-            fetch(`http://localhost:8001/${u}/images`,{
-                method:"POST",
+            fetch(`http://localhost:8001/dp/${u}`,{
+                 method:"POST",
                 
-                body: data
+                 body: data
         
-            }).then(r=>r.json()).then(path=>{
-                console.log(path)
-                setSrc('http://localhost:8001/'+path.path)
-            }).catch(err=>{
+             }).then(r=>r.json()
+             ).then(path=>{
+                 console.log(path);
+                 setSrc('http://localhost:8001/'+path.path);
+             })
+            .catch(err=>{
                 console.log(err)
             });
         }
