@@ -62,7 +62,7 @@ app.use(cookieParser());
 app.use(
     session({
         key: "username",
-        secret: "appukuttan",
+        secret: "appu703453",
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -326,7 +326,7 @@ app.post("/answer/user", verifyJWT, (req, res, next) => {
     
     answertable.create({answer:req.body.answer,userEmail:req.body.email,questiontableQuestionid:req.body.questionid})
     .then((r)=>{
-       res.send(200);
+       res.sendStatus(200);
     })
     .catch((err)=>{
         next(err)
@@ -338,14 +338,26 @@ app.post("/answer/user", verifyJWT, (req, res, next) => {
 app.get("/question/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
-    questiontable.findAll({where:{userEmail:req.params.email}})
-    .then((r)=>{
-        const questions = []
-        r.map((e)=>{
-            questions.push(e.dataValues.question)
-        })
-        res.status(200).json({question: questions})
+
+    questiontable.findAll(
+        {where:{userEmail:req.params.email}
     })
+    .then((r)=>{
+        const result =[];
+       r.map((e)=>{
+    
+        var ansobject = new Object();
+        ansobject.question =e.dataValues.question;
+        ansobject.questionid =e.dataValues.questionid;
+        
+       
+       
+          result.push(ansobject);  
+       })
+       console.log(result);
+       res.status(200).json({result:result});
+      
+ })
     .catch((err)=>{
         next(err)
     })
@@ -355,18 +367,29 @@ app.get("/question/:email", verifyJWT, (req, res, next) => {
 
 app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
-    
-    answertable.findAll({where:{userEmail:req.params.email},
-    include:[
-        questiontable
-    ]})
+
+   
+    answertable.findAll(
+        {where:{userEmail:req.params.email},
+        include: [
+            questiontable
+        ]
+    })
     .then((r)=>{
-    //    const answers = []
-    //    r.map((e)=>{
-    //        answers.push(e.dataValues.answer)
-    //    })
-    //    res.status(200).json({answers: answers})
-    console.log(r);
+        const result = [];
+       r.map((e)=>{
+        var ansobject = new Object();
+        ansobject.question =e.dataValues.questiontable.question;
+        
+        ansobject.answer = e.dataValues.answer;
+        ansobject.votes =e.dataValues.votes;
+       
+       
+          result.push(ansobject);  
+       })
+       console.log(result);
+       res.status(200).json({result:result});
+
     })
     .catch((err)=>{
         next(err)
