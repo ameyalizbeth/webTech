@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
-import Activities_nav from './Activities_nav';
 
 export default function Questions(){
     const u = localStorage.getItem("email");
@@ -22,7 +21,6 @@ export default function Questions(){
 
     return(
         <div className="dash-main">
-            <Activities_nav countQ={count}/>
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >

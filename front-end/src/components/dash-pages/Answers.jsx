@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
-import Activities_nav from './Activities_nav';
 
 export default function Answers(){
     const [details, setDetails] = useState();
@@ -19,7 +18,6 @@ export default function Answers(){
 
     return(
         <div>
-            <Activities_nav />
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >

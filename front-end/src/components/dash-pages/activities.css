@@ -8,6 +8,7 @@
     text-decoration: none;
     text-align: center;
     margin: 1rem;
+    border-radius: 10px;
 
 }
 
@@ -16,4 +17,8 @@
     border-radius: 10px;
     color: #06E6B1;
     text-decoration: none;
+}
+
+.activities-link::after{
+    background-color: #404251;
 }
