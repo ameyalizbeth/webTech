@@ -20,6 +20,7 @@
     padding: 10px;
     margin: 10px;
     width: 16vw;
+    font-size: 20px;
 }
 .nav-ul li{
     margin: 15px 10px;
@@ -73,14 +74,18 @@ a:active{
         width: 100vw;
         height: 60px;
         text-indent: -9999px;
+        font-size: 25px;
     }
     .nav-link{
         width: 60px;
         height: 100%;
         color: #ffffff61;
-        padding: 10px 10px;
+        padding: 5px 10px;
         justify-content: center;
-        margin: 0 10px;
+        margin: 0 15px;
+    }
+    .nav-link:hover{
+        height: 40px;
     }
     .nav-link div{
         margin:0;

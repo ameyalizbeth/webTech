@@ -17,6 +17,7 @@ function Dash(){
         }).then((response) => {
             setDetails(response.data.questions);
             console.log(details);
+            // console.log(response.data);
         });
     }, []);
     
@@ -31,32 +32,40 @@ function Dash(){
             >
                 <Masonry>
                 {details.map((item) => {
-                    return(
+                    if(item.answereduser !== null){
+                        return(
 
-                    <div className="qst-card">
-                        <div className="qst-card-in">
-                            <div className="qst">{item.question}</div>
-                            <div className="qst-name">
-                                <div>
-                                    <figure className='person-icon'></figure>
+                            <div className="qst-card" key={item.questionid}>
+                                <div className="qst-card-in">
+                                    <div className="qst">{item.question}</div>
+                                    <div className="qst-name">
+                                        <div>
+                                            <figure className='person-icon'></figure>
+                                        </div>
+                                        <div>
+                                            <div>{item.answereduser.fullname}</div>
+                                            <div style={{fontSize:10,color:"gray"}}>from{" "} 
+                                                <span style={{color:"#06F2B0"}}>
+                                                    {item.category}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="qst-ans">
+                                        {item.answer}
+                                        
+                                    </div>
                                 </div>
-                                <div>
-                                    <div>{item.user}</div>
-                                    <div style={{fontSize:10,color:"gray"}}>from{" "} 
-                                        <span style={{color:"#06F2B0"}}>
-                                            {item.category}
-                                        </span>
+                                <div className="vote-bar">
+                                    <div>votes:{item.answervotes}</div>
+                                    <div>
+                                        asked by:{item.user}
                                     </div>
                                 </div>
                             </div>
-                            <div className="qst-ans">
-                                {/* {item.desc} */}
-                                Answer Goes here
-                            </div>
-                        </div>
-                        <div className="vote-bar">vote bar</div>
-                    </div>
-                    )
+                            )
+                    }
+                    
 
                 })}
                 </Masonry>
