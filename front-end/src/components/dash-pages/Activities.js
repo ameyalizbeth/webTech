@@ -18,9 +18,13 @@ function Activities(){
             headers: {
                 "x-access-token": localStorage.getItem("token"),
             },
-        }).then((response) => {
-
-            setCountQ(response.data.question.length);
+        }).then((response) => 
+            response.json()
+            // console.log(r.json())
+            // setCountQ(response.data.result.length);
+        ).then((r)=>{
+            console.log(r);
+            setCountQ(r.data.result.length);
         });
     }, []);
 
