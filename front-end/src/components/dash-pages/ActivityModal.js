@@ -8,7 +8,7 @@ import { Link, Redirect } from "react-router-dom";
 function Activity(props) {
     
     const [question, setQuestion] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("select category");
     const [message, setMessage] = useState("");
     
     const token = localStorage.getItem("token");
@@ -62,7 +62,7 @@ function Activity(props) {
                 <div class='form-group'>
                     <div className="dropdown">
                         <button className="drop-btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            select category
+                            {category}
                         </button>
                         <div class="dropdown-menu drop-it " aria-labelledby="dropdownMenu2">
                             <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Entertainment")}}>Entertainment</button>
