@@ -8,7 +8,7 @@ import { MdPerson,MdEdit } from "react-icons/md";
 
 function Profile(props) {
     const [details, setDetails] = useState([]);
-    const [src,setSrc] = useState(null);
+    const [src,setSrc] = useState("");
     const u = localStorage.getItem("email");
 
     useEffect(() => {
@@ -46,9 +46,9 @@ function Profile(props) {
                            
                                 
                                 <div className="d-flex justify-content-center align-items-center" >
-                                    <figure className='profile-page-icon'>
-                                        <img className="profile-img" src={src}/>
-                                    </figure>
+                                    {!src?<figure className='profile-page-icon'></figure>:<img className="profile-img" src={src}/>}
+                                    
+                                    
                                 </div>
                     
                    <div className="d-flex justify-content-center btn-posi" >

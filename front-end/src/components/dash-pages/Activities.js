@@ -19,6 +19,8 @@ function Activities(){
     const [colorA, setColorA] = useState();
     const [colorQ, setColorQ] = useState();
     const [name, setName] = useState();
+    const [src, setSrc] = useState("");
+
     useEffect(() => {
         Axios.get(`http://localhost:8001/question/${u}`, {
 
@@ -47,6 +49,7 @@ function Activities(){
             },
         }).then((response) => {
             setName(response.data.fullname);
+            setSrc(response.data.image)
             // console.log(response.data);
         });
     }, []);
@@ -67,7 +70,7 @@ function Activities(){
         <div className="dash-main">
             <Link className="activities-link" onClick={handleQuestionClick} style={{backgroundColor:colorQ}}>My Questions ({countQ})</Link>
             <Link className="activities-link" onClick={handleAnswerClick} style={{backgroundColor:colorA}}>My Answers ({countA})</Link>
-               {questionsClicked===true?<Questions name={name} count={countQ}/>:<Answers name={name} count={countA}/>} 
+               {questionsClicked===true?<Questions name={name} src={src} count={countQ}/>:<Answers name={name} src={src} count={countA}/>} 
         </div>
       
 
