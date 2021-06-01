@@ -53,7 +53,7 @@ app.use('/dp',multer({storage:filestorage,fileFilter:fileFilter}).single('data')
 app.use(
     Cors({
         origin: ["http://localhost:3000"],
-        methods: ["GET", "POST", "PUT"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
 );
@@ -349,6 +349,7 @@ app.put("/question/user",verifyJWT,(req,res,next)=>{
 })
 
 app.delete("/question/user",verifyJWT,(req,res,next)=>{
+    
     questiontable.destroy({
         where:{
             questionid:req.body.questionid
@@ -423,7 +424,8 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        r.map((e)=>{
         var ansobject = new Object();
         ansobject.question =e.dataValues.questiontable.question;
-        
+        ansobject.category =e.dataValues.questiontable.category;
+
         ansobject.answer = e.dataValues.answer;
         ansobject.votes =e.dataValues.votes;
        

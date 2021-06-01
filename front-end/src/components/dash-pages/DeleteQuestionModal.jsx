@@ -5,34 +5,32 @@ import { Link, Redirect } from "react-router-dom";
 
 
 
-export default function EditQuestionModal(props) {
+export default function DeleteQuestionModal(props) {
     
-    const [question, setQuestion] = useState("");
-    const [category, setCategory] = useState(props.category);
+    const question = props.question;
+    const category = props.category;
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
 
-    const editQuestion = (e) => {
+    const deleteQuestion = (e) => {
         
        
         const token = localStorage.getItem("token");
 
         fetch(`http://localhost:8001/question/user`, {
-            method: "PUT",
+            method: "DELETE",
             headers: {
                 'content-type':'application/json',
                 "x-access-token": localStorage.getItem("token"),
             },
             body: JSON.stringify({
-                question:question,
-                questionid:props.id,
-                category:category
+                questionid:props.id
             }),
         })
             .then((r) => {
                 if (r.status == 200) {
-                    alert("Question edited successfully");
+                    alert("Question deleted successfully");
                 } else if (r.status == 422) alert("Invalid File format");
                 else if (r.status == 401) alert("Authentication error");
             })
@@ -45,32 +43,18 @@ export default function EditQuestionModal(props) {
 
     return (
         <div className=' mx-5 my-3'>
-            <h5 className=' my-3'>Edit Your Question </h5>
+            <h5 className=' my-3'>Are you sure?</h5>
             <form className='form-group'>
                 <div class='form-group'>
-                    <div className="dropdown">
-                        <button className="drop-btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {category}
-                        </button>
-                        <div class="dropdown-menu drop-it " aria-labelledby="dropdownMenu2">
-                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Entertainment")}}>Entertainment</button>
-                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("News & Events")}}>News and Events</button>
-                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Arts & Sports")}}>Arts and Sports</button>
-                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Education & Reference")}}>Education and Reference</button>
-                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Society & Lifestyle")}}>Society and Lifestyle</button>
-                        </div>
-                    </div>
+                   
                     <textarea
                         className='form-control my-3'
                         type='text'
                         placeholder="Ask a question"
                         name='question'
-                        id="qst-edit"
+                        id="qst-delete"
                         defaultValue={props.question}
-                        onChange={(e) => {
-                            setQuestion(e.target.value);
-                        }}
-                        required
+                        disabled="true"
                     ></textarea>
                 </div>
                 
@@ -89,10 +73,10 @@ export default function EditQuestionModal(props) {
                     <div>
                         <button
                             className='btn start-btn col-6'
-                            onClick={editQuestion}
+                            onClick={deleteQuestion}
                             type="submit"
                         >
-                            Edit Question
+                            Delete Question
                         </button>
                 
                     </div>
