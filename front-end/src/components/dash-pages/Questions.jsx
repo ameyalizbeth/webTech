@@ -3,18 +3,18 @@ import {Link} from "react-router-dom";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
 import EditQuestionModal from './EditQuestionModal';
-
-
 import { Icon, InlineIcon } from '@iconify/react';
 import arrowUp24Filled from '@iconify/icons-fluent/arrow-up-24-filled';
 import arrowDown24Filled from '@iconify/icons-fluent/arrow-down-24-filled';
 
 
 export default function Questions(props){
+
     const u = localStorage.getItem("email");
     const [details, setDetails] = useState();
     const [qst, setQst] = useState();
     const [count, setCount] = useState(0);
+
     useEffect(() => {
         Axios.get(`http://localhost:8001/question/${u}`, {
             headers: {
@@ -93,7 +93,13 @@ export default function Questions(props){
                 </div>
                             <div className="qst-name">
                                 <div>
-                                    <figure className='person-icon'></figure>
+                                    
+                                    {!(props.src)?<figure className='person-icon'></figure>:
+                                                    <img 
+                                                        className="person-img" 
+                                                        src={`http://localhost:8001/${props.src}`}
+                                                    />
+                                    }
                                 </div>
                                 <div>
                                     <div>{props.name}</div>
@@ -123,9 +129,7 @@ export default function Questions(props){
                             <Icon icon={arrowDown24Filled} />
                             </div>
                             
-                            <div>
-                                asked by Aswin
-                            </div>
+                            
                         </div>
                     </div>
                     )   

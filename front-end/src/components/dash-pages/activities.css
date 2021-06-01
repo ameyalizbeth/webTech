@@ -39,7 +39,7 @@
 .act-qst-card-in{
     padding:18px;
     background-color: #2B2C3E;
-    border-radius: 16px 16px;
+    border-radius: 16px 16px 0 0;
 }
 
 img{

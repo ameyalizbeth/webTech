@@ -37,11 +37,16 @@
 
 }
 .profile-img{
+    background: url("../assets/new-profile-vector-large.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
     width: 85px;
     height:85px;
     border-radius: 100%;
 }
-
+img[src=""] {
+    display: none;
+}
 .btn-style{
     background-color: #404251;
 }

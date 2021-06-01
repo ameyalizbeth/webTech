@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import ActivityModal from "./ActivityModal";
 import { BrowserRouter as Router,Link,useHistory } from "react-router-dom";
-
 import { Icon, InlineIcon } from '@iconify/react';
 import search24Filled from '@iconify/icons-fluent/search-24-filled';
 
@@ -10,6 +10,19 @@ import './topbar.css'
 import "./index.css";
 function TopBar(){
 
+    const [src,setSrc] = useState("");
+    const u = localStorage.getItem("email");
+
+    useEffect(() => {
+        Axios.get(`http://localhost:8001/${u}/user`, {
+            headers: {
+                "x-access-token": localStorage.getItem("token"),
+            },
+        }).then((response) => {
+
+            setSrc('http://localhost:8001/'+ response.data.image);
+        });
+    }, []);
     
     return (
         <div className="top-bar-main">
@@ -54,7 +67,8 @@ function TopBar(){
 
                 <div className="dropdown">
                     <a class="prof-a dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <figure className='top-profile'></figure>
+                        
+                    {!src?<figure className='top-profile'></figure>:<img className="top-profile" src={src}/>}
                     </a>
                     <div class="drop dropdown-menu" aria-labelledby="dropdownMenuLink">
                         
