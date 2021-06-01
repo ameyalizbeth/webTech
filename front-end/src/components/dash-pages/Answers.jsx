@@ -2,6 +2,11 @@ import React,{useEffect, useState} from 'react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
 import './activities.css';
+import { Icon, InlineIcon } from '@iconify/react';
+import arrowUp24Filled from '@iconify/icons-fluent/arrow-up-24-filled';
+import arrowDown24Filled from '@iconify/icons-fluent/arrow-down-24-filled';
+
+
 export default function Answers(props){
     const [details, setDetails] = useState();
     const email = localStorage.getItem("email");
@@ -18,7 +23,7 @@ export default function Answers(props){
 
 
     return(
-        <div className="dash-main">
+        <div>
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >
@@ -31,7 +36,12 @@ export default function Answers(props){
                             <div className="qst">{item.question}</div>
                             <div className="qst-name">
                                 <div>
-                                    <figure className='person-icon'></figure>
+                                {!(props.src)?<figure className='person-icon'></figure>:
+                                                    <img 
+                                                        className="person-img" 
+                                                        src={`http://localhost:8001/${props.src}`}
+                                                    />
+                                    }
                                 </div>
                                 <div>
                                     <div>{props.name}</div>
@@ -46,7 +56,24 @@ export default function Answers(props){
                                 {item.answer}
                             </div>
                         </div>
-                        <div className="activities-vote-bar"><img className="vote-icon" src="https://img.icons8.com/plumpy/24/000000/up.png"/>{item.votes}</div>
+                        <div className="vote-bar">
+
+                    
+                    
+
+                        {/* <button
+                            type='button' </button> */}
+                            <div>
+                            <Icon icon={arrowUp24Filled} />
+
+                            <span className="vote-count">{item.votes}</span>
+                            
+                            
+                            <Icon icon={arrowDown24Filled} />
+                            </div>
+                            
+                            
+                        </div>
                     </div>
                     )
 

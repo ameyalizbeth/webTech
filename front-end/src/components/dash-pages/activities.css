@@ -12,6 +12,11 @@
 
 }
 
+.activities-main{
+    padding: 5rem;
+    /* padding-top: 10px; */
+}
+
 .activities-link:hover{
     background-color: #404251;
     border-radius: 10px;
@@ -52,13 +57,13 @@ img{
     width: 10%;
     color: #6f717e;
 }
-
+/* 
 #menu-icon:hover{
     background-color: #404251;
     border-radius: 100%;
-}
+} */
 
 .qst{
     display: inline-block;
-    width: 80%;
+    /* width: 80%; */
 }

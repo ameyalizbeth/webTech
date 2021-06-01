@@ -18,7 +18,7 @@ function Explore(){
         }).then((response) => {
             setDetails(response.data.questions);
             // setCount(response.data.questions.length);
-            console.log(details);
+            // console.log(details);
             // console.log(response.data.questions.length);
         });
     }, []);
@@ -27,7 +27,7 @@ function Explore(){
     return (
 
         <div className="dash-main">
-            <h5>All topics</h5>
+            <h5>All topics({details.length})</h5>
             
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
@@ -35,7 +35,7 @@ function Explore(){
                 <Masonry>
                 {details!==undefined?details.map((item) => {
                     
-                    if(item.answereduser === null){
+                    
                         return(
 
                             <div className="qst-card" key={item.questionid}>
@@ -63,7 +63,7 @@ function Explore(){
                                 </div> */}
                             </div>
                             )
-                    }
+                    
                     
 
                 }):""}

@@ -3,11 +3,15 @@ import './dash.css';
 import {initData} from './data';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
+import { Icon, InlineIcon } from '@iconify/react';
+import arrowUp24Filled from '@iconify/icons-fluent/arrow-up-24-filled';
+import arrowDown24Filled from '@iconify/icons-fluent/arrow-down-24-filled';
 
 
 function Dash(){
 
     const [details, setDetails] = useState([]);
+    const [src,setSrc] = useState(null);
 
     useEffect(() => {
         Axios.get(`http://localhost:8001/question`, {
@@ -16,7 +20,8 @@ function Dash(){
             },
         }).then((response) => {
             setDetails(response.data.questions);
-            console.log(details);
+            setSrc('http://localhost:8001/'+ response.data.image);
+            // console.log(details);
             // console.log(response.data);
         });
     }, []);
@@ -40,7 +45,15 @@ function Dash(){
                                     <div className="qst">{item.question} ?</div>
                                     <div className="qst-name">
                                         <div>
-                                            <figure className='person-icon'></figure>
+                                            {!(item.answereduser.image)?<figure className='person-icon'></figure>:
+                                                (!src?<figure className='person-icon'></figure>:
+                                                    <img 
+                                                        className="person-img" 
+                                                        src={`http://localhost:8001/${item.answereduser.image}`}
+                                                    />
+                                                )
+                                            }
+                                            
                                         </div>
                                         <div>
                                             <div>{item.answereduser.fullname}</div>
@@ -56,12 +69,22 @@ function Dash(){
                                         
                                     </div>
                                 </div>
-                                <div className="vote-bar" style={{color:"gray",fontSize:12}}>
-                                    <div>votes:{item.answervotes}</div>
+
+                                <div className="vote-bar">
+                                    <div>
+                                    <Icon icon={arrowUp24Filled} />
+
+                                    <span className="vote-count">{item.answervotes}</span>
+                                    
+                                    
+                                    <Icon icon={arrowDown24Filled} />
+                                    </div>
                                     <div>
                                         asked by <span style={{color:"#06E6B1",fontSize:12}}>{item.user}</span>
-                                    </div>
+                                    </div>   
                                 </div>
+
+                                
                             </div>
                             )
                     }
