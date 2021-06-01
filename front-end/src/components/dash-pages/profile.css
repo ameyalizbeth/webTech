@@ -36,6 +36,11 @@
     
 
 }
+.profile-img{
+    width: 85px;
+    height:85px;
+    border-radius: 100%;
+}
 
 .btn-style{
     background-color: #404251;
@@ -53,12 +58,13 @@
 }
 .edit-btn{
     background-color: #2B2C3E;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 .icon-edit{
     color:#999;

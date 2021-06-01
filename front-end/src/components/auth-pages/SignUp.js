@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
-import Select from "react-select";
-
-const depment = [
-    { value: "Computer Science Engineering", label: "Computer Science" },
-    { value: "Mechanical Engineering", label: "Mechanical" },
-    { value: "Electronics & Communication Engineering", label: "Electronics" },
-    { value: "Applied Electronics", label: "Applied" },
-    { value: "Architecture", label: "Architecture" },
-    { value: "Electrical Engineering", label: "Electrical" },
-   
-];
 
 function SignUp() {
-    const [department, setDepartment] = useState("");
+    const [department, setDepartment] = useState("Select department");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [fullname, setFullname] = useState("");
@@ -25,7 +14,7 @@ function SignUp() {
         e.preventDefault();
 
         Axios.post("http://localhost:8001/signup", {
-            department: department.value,
+            department: department,
             fullname:fullname,
             password: password,
             email: email
@@ -110,12 +99,22 @@ function SignUp() {
                                     }}
                                     required
                                 ></input >
-                                <Select
-                                    className="my-4"
-                                    defaultValue={department}
-                                    onChange={setDepartment}
-                                    options={depment}
-                                />
+                            
+                                <div class=' mt-3'>
+                                    <div className="dropdown">
+                                        <button className="drop-btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {department}
+                                        </button>
+                                        <div class="dropdown-menu drop-it" aria-labelledby="dropdownMenu3">
+                                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setDepartment("Computer Science")}}>Computer Science</button>
+                                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setDepartment("Mechanical")}}>Mechanical</button>
+                                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setDepartment("Electronics")}}>Electronics</button>
+                                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setDepartment("Electrical")}}>Electrical</button>
+                                            <button className="dropdown-item drop-each" type="button" onClick={()=>{setDepartment("Civil")}}>Civil</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                                
                             </div>
                             <div className='my-2'>
