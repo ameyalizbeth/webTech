@@ -270,7 +270,7 @@ app.get("/question", verifyJWT, async(req, res, next) => {
     .then((r) => {
         promise1(r)
         .then(function (value) {
-          
+          value.reverse();
           res.status(200).json({ questions: value });
         })
         .catch((err) => {
