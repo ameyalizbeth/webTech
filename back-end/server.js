@@ -53,7 +53,7 @@ app.use('/dp',multer({storage:filestorage,fileFilter:fileFilter}).single('data')
 app.use(
     Cors({
         origin: ["http://localhost:3000"],
-        methods: ["GET", "POST", "PUT"],
+        methods: ["GET", "POST", "PUT","DELETE"],
         credentials: true,
     })
 );
@@ -423,7 +423,7 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        r.map((e)=>{
         var ansobject = new Object();
         ansobject.question =e.dataValues.questiontable.question;
-        
+        ansobject.category = e.dataValues.questiontable.category;
         ansobject.answer = e.dataValues.answer;
         ansobject.votes =e.dataValues.votes;
        
@@ -440,6 +440,22 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
 
         
 });
+app.get("/category/:c",(req,res,next)=>{
+    questiontable.findAll(
+        {where:{category:req.params.c}
+    }).then((r)=>{
+        const result = [];
+        r.map((e)=>{
+            var ob = new Object();
+            ob.question = e.dataValues.question;
+            ob.questionid = e.dataValues.questionid;
+            ob.category = e.dataValues.category;
+            result.push(ob);
+        })
+
+        res.status(200).json({result:result});
+    })
+})
 
 app.use((error,req,res,next)=>{
     console.log(error);
@@ -448,6 +464,9 @@ app.use((error,req,res,next)=>{
     res.status(status).send();
     console.log(status);
 });
+
+
+
 sequelize
     .sync()
     .then((r) => {
