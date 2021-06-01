@@ -72,7 +72,7 @@ function Activity(props) {
                             <button className="dropdown-item drop-each" type="button" onClick={()=>{setCategory("Society & Lifestyle")}}>Society and Lifestyle</button>
                         </div>
                     </div>
-                    <input
+                    <textarea
                         className='form-control iin my-3'
                         type='text'
                         placeholder='Write your Question'
@@ -81,7 +81,7 @@ function Activity(props) {
                             setQuestion(e.target.value);
                         }}
                         required
-                    ></input>
+                    ></textarea>
                 </div>
                 
                 <div className='my-2 d-flex justify-content-end align-items-center'>
