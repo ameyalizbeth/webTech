@@ -423,7 +423,8 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        r.map((e)=>{
         var ansobject = new Object();
         ansobject.question =e.dataValues.questiontable.question;
-        
+        ansobject.category =e.dataValues.questiontable.category;
+
         ansobject.answer = e.dataValues.answer;
         ansobject.votes =e.dataValues.votes;
        

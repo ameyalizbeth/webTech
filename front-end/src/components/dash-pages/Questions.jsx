@@ -110,13 +110,13 @@ export default function Questions(props){
                         </div>
 
                         
-                        <div className="vote-bar">
+                        {/* <div className="vote-bar">
 
                     
                     
 
-                        {/* <button
-                            type='button' </button> */}
+                        <button
+                            type='button' </button>
                             <div>
                             <Icon icon={arrowUp24Filled} />
 
@@ -129,7 +129,7 @@ export default function Questions(props){
                             <div>
                                 asked by Aswin
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     )   
                 })}

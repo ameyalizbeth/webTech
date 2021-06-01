@@ -8,8 +8,7 @@ import { Link, Redirect } from "react-router-dom";
 export default function EditQuestionModal(props) {
     
     const [question, setQuestion] = useState("");
-    const [category, setCategory] = useState("Select the category");
-    
+    const [category, setCategory] = useState("Select category");
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
@@ -27,7 +26,7 @@ export default function EditQuestionModal(props) {
             },
             body: JSON.stringify({
                 question:question,
-                questionid:1,
+                questionid:props.id,
                 category:category
             }),
         })
@@ -48,16 +47,6 @@ export default function EditQuestionModal(props) {
         <div className=' mx-5 my-3'>
             <h5 className=' my-3'>Edit Your Question </h5>
             <form className='form-group'>
-                {/* <div class='form-group'>
-                    <div className="qst-rules">
-                        <ul>
-                            <li>Make sure your question has not been asked already</li>
-                            <li>Keep your question short and to the point</li>
-                            <li>Make sure your question does not contain anything offensive or immoral</li>
-                        </ul>
-                    </div>
-                    
-                </div> */}
                 <div class='form-group'>
                     <div className="dropdown">
                         <button className="drop-btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
