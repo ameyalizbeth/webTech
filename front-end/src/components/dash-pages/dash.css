@@ -37,8 +37,16 @@
     background: #404251;
     height: 35px;
     border-radius: 0px 0px 16px 16px;
-    padding:6px 20px;
+    padding:8px 20px;
+    opacity: 0.5;
+    font-size: 12px;
 }
+
+.vote-count{
+    margin-left: 6px;
+    margin-right: 16px;
+}
+
 .qst-name{
     display: flex;
     margin-top: 5px;
