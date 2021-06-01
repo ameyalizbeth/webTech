@@ -46,10 +46,7 @@ export default function Questions(){
                                     </div>
                                 </div>
                             </div>
-                            <div className="qst-ans">
-                                {/* {item.desc} */}
-                                Answer Goes here
-                            </div>
+                        
                         </div>
                         <div className="vote-bar">vote bar</div>
                     </div>

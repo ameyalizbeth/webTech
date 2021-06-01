@@ -37,7 +37,7 @@ function Dash(){
 
                             <div className="qst-card" key={item.questionid}>
                                 <div className="qst-card-in">
-                                    <div className="qst">{item.question}</div>
+                                    <div className="qst">{item.question} ?</div>
                                     <div className="qst-name">
                                         <div>
                                             <figure className='person-icon'></figure>
@@ -56,10 +56,10 @@ function Dash(){
                                         
                                     </div>
                                 </div>
-                                <div className="vote-bar">
+                                <div className="vote-bar" style={{color:"gray",fontSize:12}}>
                                     <div>votes:{item.answervotes}</div>
                                     <div>
-                                        asked by:{item.user}
+                                        asked by <span style={{color:"#06E6B1",fontSize:12}}>{item.user}</span>
                                     </div>
                                 </div>
                             </div>
