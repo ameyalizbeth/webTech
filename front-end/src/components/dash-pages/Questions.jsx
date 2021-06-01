@@ -3,11 +3,14 @@ import {Link} from "react-router-dom";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import Axios from "axios";
 import EditQuestionModal from './EditQuestionModal';
+import './editquestionmodal.css';
 
 export default function Questions(props){
     const u = localStorage.getItem("email");
     const [details, setDetails] = useState();
     const [qst, setQst] = useState();
+    const [qstId, setQstId] = useState();
+
     const [count, setCount] = useState(0);
     useEffect(() => {
         Axios.get(`http://localhost:8001/question/${u}`, {
@@ -30,10 +33,10 @@ export default function Questions(props){
             <div
                     className='modal fade'
                     data-backdrop="false"
-                    id='exampleEditQuestionModalCenter'
+                    id='EditQuestionModalCenter'
                     tabindex='-1'
                     role='dialog'
-                    aria-labelledby='exampleEditQuestionModalCenterTitle'
+                    aria-labelledby='EditQuestionModalCenterTitle'
                     aria-hidden='true'
                 >
                     <div
@@ -41,7 +44,7 @@ export default function Questions(props){
                         role='document'
                     >
                         <div className='modal-content modal-main'>
-                            {qst===undefined?"":<EditQuestionModal question={qst}/>}
+                            {qst===undefined?"":<EditQuestionModal question={qst} id={qstId}/>}
                         </div>
                     </div>
                 </div>
@@ -63,14 +66,14 @@ export default function Questions(props){
                             
                             </a>
                             
-                            <div class="drop dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <div class="drop dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuLink">
                             <button
                                 className='btn dr-link dropdown-item'
                                 type='button'
                                 data-toggle='modal'
-                                data-target='#exampleEditQuestionModalCenter'
+                                data-target='#EditQuestionModalCenter'
                                 style={{marginRight:40}}
-                                onClick={()=>{setQst(item.question)}}>
+                                onClick={()=>{setQst(item.question); setQstId(item.questionid)}}>
                                     Edit
                                 </button>
                                 
@@ -78,7 +81,7 @@ export default function Questions(props){
                                 className='btn dr-link dropdown-item'
                                 type='button'
                                 data-toggle='modal'
-                                data-target='#exampleModalCenter'
+                                data-target='#deleteQuestionModalCenter'
                                 style={{marginRight:40}}>
                                     Delete
                                 </button>

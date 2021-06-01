@@ -2,3 +2,8 @@
     color: white;
     height: auto;
 }
+
+#dropdown{
+    transform: translate3d(200px, 20px, 0px);
+    width: 50%;
+}

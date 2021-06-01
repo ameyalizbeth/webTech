@@ -8,6 +8,8 @@ import './activities.css';
 import Main from './Main';
 import Questions from './Questions';
 import Answers from './Answers';
+
+
 function Activities(){
 
     const u = localStorage.getItem("email");
