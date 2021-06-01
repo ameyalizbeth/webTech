@@ -12,13 +12,13 @@ function Logout () {
 
    
         return (
-            <div className='container user-select-none'>
-                <div className='my-5 logged-out d-flex justify-content-center user-select-none'>
+            <div className='user-select-none out-bg'>
+                <div className='logged-out d-flex justify-content-center user-select-none'>
                     <div className='d-flex flex-column align-items-center'>
                         <div className='log-page-title'>
                             {/* <TitleSVG /> */}
                         </div>
-                        <h5 className='mt-3 mb-4 grey'>
+                        <h5 className='mt-5 mb-4 grey'>
                             You've been logged out!
                         </h5>
                         <Link to='/' className='btn start-btn'>

@@ -5,6 +5,12 @@ import Axios from "axios";
 import EditQuestionModal from './EditQuestionModal';
 import './editquestionmodal.css';
 
+
+import { Icon, InlineIcon } from '@iconify/react';
+import arrowUp24Filled from '@iconify/icons-fluent/arrow-up-24-filled';
+import arrowDown24Filled from '@iconify/icons-fluent/arrow-down-24-filled';
+
+
 export default function Questions(props){
     const u = localStorage.getItem("email");
     const [details, setDetails] = useState();
@@ -101,11 +107,31 @@ export default function Questions(props){
                                     </div>
                                 </div>
                             </div>
-                           
+                        </div>
+
+                        
+                        <div className="vote-bar">
+
+                    
+                    
+
+                        {/* <button
+                            type='button' </button> */}
+                            <div>
+                            <Icon icon={arrowUp24Filled} />
+
+                            <span className="vote-count">10</span>
+                            
+                            
+                            <Icon icon={arrowDown24Filled} />
+                            </div>
+                            
+                            <div>
+                                asked by Aswin
+                            </div>
                         </div>
                     </div>
-                    )
-
+                    )   
                 })}
                 </Masonry>
             </ResponsiveMasonry>
