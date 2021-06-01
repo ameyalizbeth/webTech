@@ -19,21 +19,21 @@ export default function EditQuestionModal(props) {
        
         const token = localStorage.getItem("token");
 
-        fetch(``, {
-            method: "POST",
+        fetch(`http://localhost:8001/question/user`, {
+            method: "PUT",
             headers: {
                 'content-type':'application/json',
                 "x-access-token": localStorage.getItem("token"),
             },
             body: JSON.stringify({
                 question:question,
-                category:category,
-                email:email
+                questionid:1,
+                category:category
             }),
         })
             .then((r) => {
                 if (r.status == 200) {
-                    alert("Question added successfully");
+                    alert("Question edited successfully");
                 } else if (r.status == 422) alert("Invalid File format");
                 else if (r.status == 401) alert("Authentication error");
             })
