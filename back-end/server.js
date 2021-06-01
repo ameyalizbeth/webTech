@@ -24,7 +24,7 @@ questiontable.belongsTo(user,{constraints:true});
 user.hasMany(answertable);
 answertable.belongsTo(user,{constraints:true});
 questiontable.hasMany(answertable);
-answertable.belongsTo(questiontable,{constraints:true});
+answertable.belongsTo(questiontable,{constraints:true,onDelete:'CASCADE'});
 
 
 app.use(bodyParser.json());
@@ -53,7 +53,7 @@ app.use('/dp',multer({storage:filestorage,fileFilter:fileFilter}).single('data')
 app.use(
     Cors({
         origin: ["http://localhost:3000"],
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST", "PUT"],
         credentials: true,
     })
 );
@@ -287,9 +287,24 @@ app.get("/question", verifyJWT, async(req, res, next) => {
 
 app.get("/answer/:questionid",verifyJWT,(req,res,next)=>{
     answertable.findAll(
-        {where:{questiontableQuestionid:req.params.questionid}})
+        {
+            where:{questiontableQuestionid:req.params.questionid},
+            include:[
+                user
+            ]
+        })
     .then((r)=>{
-        console.log(r);
+        const result = []
+        r.map((e)=>{
+            var obj = new Object();
+            obj.answerid = e.dataValues.answerid;
+            obj.answer = e.dataValues.answer;
+            obj.votes = e.dataValues.votes;
+            obj.answereduser = e.dataValues.user.fullname;
+            result.push(obj);
+        })
+        res.send(200).json({result:result});
+        console.log(result);
     })
     .catch((err)=>{
         next(err);
@@ -321,6 +336,34 @@ app.post("/question/user", verifyJWT, (req, res, next) => {
 
         
 });
+app.put("/question/user",verifyJWT,(req,res,next)=>{
+    questiontable.findByPk(req.body.questionid)
+    .then((q)=>{
+        q.update({question:req.body.question,category:req.body.category})
+        .then(r=>res.sendStatus(200))
+        .catch((err)=>{
+            next(err);
+        })
+    })
+
+})
+
+app.delete("/question/user",verifyJWT,(req,res,next)=>{
+    questiontable.destroy({
+        where:{
+            questionid:req.body.questionid
+        }
+    })
+    .then((r)=>{
+        res.sendStatus(200);
+
+    })
+    .catch((err)=>{
+        next(err);
+    })
+})
+
+
 app.post("/answer/user", verifyJWT, (req, res, next) => {
     // console.log(req.params.email);
     
@@ -349,7 +392,7 @@ app.get("/question/:email", verifyJWT, (req, res, next) => {
         var ansobject = new Object();
         ansobject.question =e.dataValues.question;
         ansobject.questionid =e.dataValues.questionid;
-        ansobject.category = e.dataValues.category;
+        ansobject.category =e.dataValues.category;
        
        
           result.push(ansobject);  
@@ -380,7 +423,7 @@ app.get("/activityanswer/:email", verifyJWT, (req, res, next) => {
        r.map((e)=>{
         var ansobject = new Object();
         ansobject.question =e.dataValues.questiontable.question;
-        ansobject.category = e.dataValues.questiontable.category;
+        
         ansobject.answer = e.dataValues.answer;
         ansobject.votes =e.dataValues.votes;
        
