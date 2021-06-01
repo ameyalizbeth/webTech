@@ -70,7 +70,10 @@ function Activities(){
         <div className="dash-main">
             <Link className="activities-link" onClick={handleQuestionClick} style={{backgroundColor:colorQ}}>My Questions ({countQ})</Link>
             <Link className="activities-link" onClick={handleAnswerClick} style={{backgroundColor:colorA}}>My Answers ({countA})</Link>
-               {questionsClicked===true?<Questions name={name} src={src} count={countQ}/>:<Answers name={name} src={src} count={countA}/>} 
+            <div className="activities-main">
+            {questionsClicked===true?<Questions name={name} src={src} count={countQ}/>:<Answers name={name} src={src} count={countA}/>} 
+
+            </div>
         </div>
       
 

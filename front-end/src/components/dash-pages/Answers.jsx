@@ -23,7 +23,7 @@ export default function Answers(props){
 
 
     return(
-        <div className="dash-main">
+        <div>
             <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >
