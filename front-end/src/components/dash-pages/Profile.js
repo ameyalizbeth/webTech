@@ -60,7 +60,7 @@ function Profile(props) {
                             data-target='#exampleEditModalCenter'
                         >
                             <div className=' d-flex align-item-center icon-edit'>
-                                <MdEdit size={18}/>
+                                <MdEdit size={14}/>
                             </div>
                         </button>
                     </div>
